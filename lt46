@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volkswagen LT46 - BENZ&Co</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#f4f4f4;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:40px;
+  color:#111;
+}
+
+.container{
+  background:#fff;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.1);
+  max-width:600px;
+  width:90%;
+  text-align:center;
+  position:relative;
+  margin-bottom:40px;
+}
+
+h1{
+  color:#111;
+  margin-bottom:10px;
+  font-weight:500;
+}
+
+#backButton{
+  display:inline-block;
+  margin-bottom:15px;
+  padding:10px 20px;
+  font-size:16px;
+  font-weight:500;
+  color:#fff;
+  background:#111;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  text-decoration:none;
+  transition:0.3s;
+}
+#backButton:hover{ background:#333; }
+
+#contactButton{
+  padding:14px 28px;
+  font-size:18px;
+  font-weight:600;
+  font-family:'Poppins', sans-serif;
+  color:#fff;
+  background:#28a745;
+  border:none;
+  border-radius:16px;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+#contactButton:hover{
+  background:#1e7e34;
+  transform:scale(1.05);
+}
+
+img#mainImage{
+  width:100%;
+  height:360px;
+  object-fit: contain; /* Bande nere attivate */
+  background-color: #000;
+  border-radius:16px;
+  border:1px solid #ccc;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+  cursor:pointer;
+  display:block;
+  margin-bottom:8px;
+}
+
+#fullscreenBtn{
+  display:inline-block;
+  margin-bottom:10px;
+  font-size:14px;
+  font-weight:500;
+  color:#fff;
+  background:linear-gradient(145deg, #333, #444);
+  padding:12px 24px;
+  border-radius:16px;
+  border:none;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 4px 15px rgba(0,0,0,.2);
+  animation:blinkText 5.5s infinite;
+}
+#fullscreenBtn:hover{
+  background:linear-gradient(145deg, #444, #555);
+  transform:scale(1.05);
+}
+
+@keyframes blinkText {
+  0%, 50%, 100% { opacity:1; }
+  25%, 75% { opacity:0.6; }
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.dot.active {
+  background-color: #111;
+  transform: scale(1.3);
+}
+
+button.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  border:none;
+  font-size:26px;
+  padding:12px 16px;
+  cursor:pointer;
+  border-radius:50%;
+  box-shadow:0 3px 10px rgba(0,0,0,.3);
+  transition:0.25s;
+}
+button.arrow:hover{ background:rgba(0,0,0,0.8); }
+#prev{left:-15px;} #next{right:-15px;}
+
+ul#specList{
+  margin-top:20px;
+  text-align:left;
+  padding-left:0;
+  list-style:none;
+}
+ul#specList li{
+  padding:6px 0;
+  border-bottom:1px solid #e0e0e0;
+  font-weight:400;
+}
+ul#specList li strong{ color:#111; }
+
+.price-contact-wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.price-box{
+  font-size:22px;
+  font-weight:700;
+  color:#111;
+  border:2px solid #111;
+  padding:14px 22px;
+  border-radius:14px;
+}
+
+#contactModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+#contactModal.show{ display:flex; }
+#contactModal .modal-content{
+  background:#fff;
+  padding:30px 20px;
+  border-radius:18px;
+  text-align:center;
+  max-width:350px;
+  width:90%;
+  box-shadow:0 8px 25px rgba(0,0,0,.2);
+  transform:scale(0.8);
+  opacity:0;
+  animation:scaleUp 0.25s forwards;
+}
+#contactModal .modal-content h2{ margin-bottom:15px; font-size:22px; color:#111; }
+#contactModal .modal-content p{ font-size:18px; margin-bottom:12px; user-select:text; }
+#contactModal .modal-content a{ color:#111; text-decoration:none; }
+#contactModal .modal-content a:hover{ text-decoration:underline; }
+#contactModal .modal-content button{
+  padding:10px 20px;
+  font-size:16px;
+  background:#111;
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  transition:0.25s;
+}
+#contactModal .modal-content button:hover{ background:#333; }
+
+@keyframes scaleUp{
+  from{opacity:0; transform:scale(0.8);}
+  to{opacity:1; transform:scale(1);}
+}
+
+/* FIX LIGHTBOX */
+#imageLightbox{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.95);
+  justify-content:center;
+  align-items:center;
+  z-index:1500;
+}
+#imageLightbox.show{ display:flex; }
+#imageLightbox img{ 
+  max-width:90%; 
+  max-height:90%; 
+  object-fit: contain;
+  border-radius:16px; 
+  box-shadow:0 8px 30px rgba(0,0,0,.5); 
+}
+#imageLightbox button.closeLightbox{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  border:none;
+  font-size:28px;
+  padding:8px 14px;
+  border-radius:50%;
+  cursor:pointer;
+}
+#imageLightbox button.lightboxArrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  border:none;
+  font-size:28px;
+  padding:12px 16px;
+  border-radius:50%;
+  cursor:pointer;
+}
+#imagePrev{ left:30px; } #imageNext{ right:30px; }
+
+#imageCounterLightbox{
+  position:absolute;
+  bottom:20px;
+  font-size:16px;
+  color:#fff;
+  background:rgba(0,0,0,0.5);
+  padding:6px 12px;
+  border-radius:12px;
+}
+
+.map-section{
+  max-width:600px;
+  width:90%;
+  margin-bottom:20px;
+  text-align:center;
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 12px 25px rgba(0,0,0,.08);
+}
+.map-section h2{ margin-bottom:15px; font-weight:500; color:#111; }
+.map-section iframe{ width:100%; height:250px; border:0; border-radius:14px; }
+#bottomBackButton{
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 20px;
+  font-size:16px;
+  font-weight:500;
+  color:#fff;
+  background:#111;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  text-decoration:none;
+  transition:0.25s;
+}
+#bottomBackButton:hover{ background:#333; }
+</style>
+</head>
+<body>
+
+<div class="container">
+<a href="index.html" id="backButton">< Torna alla Home</a>
+<h1>Volkswagen LT46 [GEMELLATO]</h1>
+
+<div style="position:relative;">
+  <button class="arrow" id="prev">‹</button>
+  <img id="mainImage" src="immagini/lt46.jpg">
+  <button class="arrow" id="next">›</button>
+</div>
+
+<div class="dots-container" id="dotsContainer"></div>
+
+<button id="fullscreenBtn" onclick="openLightbox(current)">
+  Visualizza a schermo intero
+</button>
+
+<ul id="specList">
+  <li><strong>Tipologia:</strong> Furgone</li>
+  <li><strong>Anno immatricolazione:</strong> 2005</li>
+  <li><strong>Km:</strong> 211.000</li>
+  <li><strong>Alimentazione:</strong> Diesel</li>
+  <li><strong>Cambio:</strong> Manuale</li>
+  <li><strong>Colore esterno:</strong> Bianco</li>
+  <li><strong>Colore interno:</strong> Nero</li>
+  <li><strong>Potenza:</strong> 80 kW / 109 CV</li>
+  <li><strong>Cilindrata:</strong> 2.500 </li>
+  <li><strong>Peso a vuoto:</strong> 900 kg</li>
+  <li><strong>Numero proprietari precedenti:</strong> 1</li>
+  <li><strong>Classe emissioni:</strong> Euro 3</li>
+</ul>
+
+<div class="price-contact-wrapper">
+  <div class="price-box">Prezzo: € 4.400</div>
+  <button id="contactButton">CONTATTACI</button>
+</div>
+
+</div>
+
+<div id="contactModal">
+  <div class="modal-content">
+    <h2>Contatti</h2>
+    <p>📞 <a href="tel:+393313344567">+39 331 334 4567</a></p>
+    <p>✉️ <a href="mailto:benz3co@gmail.com">benz3co@gmail.com</a></p>
+    <button onclick="closeModal()">Chiudi</button>
+  </div>
+</div>
+
+<div id="imageLightbox">
+  <img src="" id="lightboxImage">
+  <button class="closeLightbox" onclick="closeLightbox()">×</button>
+  <button class="lightboxArrow" id="imagePrev">‹</button>
+  <button class="lightboxArrow" id="imageNext">›</button>
+  <div id="imageCounterLightbox">1 / 13</div>
+</div>
+
+<div class="map-section">
+<h2>Dove si trova?</h2>
+<iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2941785563914!2d14.475171776510307!3d40.854445628859945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb09f984511d7%3A0x6b83f05f778c772e!2sVia%20Francesco%20Perri%2C%2026%2C%2080044%20Ottaviano%20NA!5e0!3m2!1sit!2sit!4v1715612345678!5m2!1sit!2sit"
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+<a href="index.html" id="bottomBackButton">< Torna alla Home</a>
+</div>
+
+<script>
+const images = [
+  'immagini/lt46.jpg',
+  'immagini/lt461.jpg',
+  'immagini/lt462.jpg',
+  'immagini/lt463.jpg',
+  'immagini/lt465.jpg',
+  'immagini/lt466.jpg',
+  'immagini/lt467.jpg',
+  'immagini/lt468.jpg',
+  'immagini/lt469.jpg',
+  'immagini/lt4610.jpg',
+  'immagini/lt4611.jpg',
+  'immagini/lt4612.jpg',
+  'immagini/lt4613.jpg',
+  'immagini/lt4614.jpg',
+];
+
+let current = 0;
+const mainImage = document.getElementById('mainImage');
+const dotsContainer = document.getElementById('dotsContainer');
+
+images.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.classList.add('dot');
+  if(i === 0) dot.classList.add('active');
+  dot.onclick = () => updateImage(i);
+  dotsContainer.appendChild(dot);
+});
+
+function updateImage(index){
+  current = index;
+  mainImage.src = images[current];
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+}
+
+document.getElementById('prev').onclick = ()=>{ current = (current - 1 + images.length) % images.length; updateImage(current); };
+document.getElementById('next').onclick = ()=>{ current = (current + 1) % images.length; updateImage(current); };
+
+const contactButton = document.getElementById('contactButton');
+const contactModal = document.getElementById('contactModal');
+contactButton.onclick = () => { contactModal.classList.add('show'); }
+function closeModal(){ contactModal.classList.remove('show'); }
+contactModal.onclick = (e) => { if(e.target === contactModal){ closeModal(); } }
+
+const imageLightbox = document.getElementById('imageLightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const imagePrev = document.getElementById('imagePrev');
+const imageNext = document.getElementById('imageNext');
+const imageCounterLightbox = document.getElementById('imageCounterLightbox');
+
+function openLightbox(index){
+  current = index;
+  lightboxImage.src = images[current];
+  imageCounterLightbox.textContent = `${current+1} / ${images.length}`;
+  imageLightbox.classList.add('show');
+}
+function closeLightbox(){ imageLightbox.classList.remove('show'); }
+
+imagePrev.onclick = (e)=>{
+  e.stopPropagation();
+  current = (current - 1 + images.length) % images.length;
+  lightboxImage.src = images[current];
+  updateImage(current);
+  imageCounterLightbox.textContent = `${current+1} / ${images.length}`;
+};
+imageNext.onclick = (e)=>{
+  e.stopPropagation();
+  current = (current + 1) % images.length;
+  lightboxImage.src = images[current];
+  updateImage(current);
+  imageCounterLightbox.textContent = `${current+1} / ${images.length}`;
+};
+imageLightbox.onclick = (e)=>{ if(e.target === imageLightbox) closeLightbox(); };
+</script>
+
+</body>
+</html>
