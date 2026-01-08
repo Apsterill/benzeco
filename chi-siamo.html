@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chi siamo | BENZ&Co</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  margin:0;
+  background:#f5f5f5;
+  color:#111;
+}
+
+/* HEADER */
+header{
+  background:#000;
+  color:#fff;
+  padding:10px 20px 10px; /* header più basso */
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+header img{
+  height:190px; /* logo grande */
+  width:auto;
+  object-fit:contain;
+  display:block;
+  margin:0 auto 5px; /* leggermente meno spazio sotto logo */
+}
+
+header p{
+  margin:4px 0 0;
+  font-size:14px;
+  opacity:.7;
+}
+
+/* NAV */
+nav{
+  margin-top:-39px; /* pulsanti più in alto vicino al logo */
+  display:flex;
+  justify-content:center;
+  gap:22px;
+}
+
+nav a{
+  text-decoration:none;
+}
+
+nav button{
+  background:transparent;
+  color:#fff;
+  border:1px solid #fff;
+  padding:10px 22px;
+  border-radius:30px;
+  font-size:15px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+nav button:hover{
+  background:#fff;
+  color:#000;
+}
+
+/* SEZIONE */
+.section{
+  max-width:900px;
+  margin:80px auto;
+  background:#fff;
+  padding:60px 40px;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.1);
+  text-align:center;
+}
+
+.section h2{
+  font-size:30px;
+  margin-bottom:30px;
+  letter-spacing:1px;
+}
+
+.section p{
+  font-size:16px;
+  line-height:1.8;
+  color:#333;
+  margin-bottom:18px;
+}
+
+/* BOTTONE */
+.section button{
+  margin-top:30px;
+  background:#000;
+  color:#fff;
+  border:none;
+  padding:14px 36px;
+  border-radius:40px;
+  font-size:15px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.section button:hover{
+  background:#222;
+}
+
+/* FOOTER */
+footer{
+  background:#000;
+  color:#aaa;
+  text-align:center;
+  padding:22px;
+  font-size:13px;
+  letter-spacing:.5px;
+  margin-top:80px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="immagini/logo.jpeg" alt="Logo BENZ&Co">
+  <nav>
+    <button onclick="location.href='index.html'">Home</button>
+    <button onclick="location.href='chi-siamo.html'">Chi siamo</button>
+    <button onclick="location.href='contatti.html'">Contatti</button>
+  </nav>
+  <p>Professionalità, fiducia e qualità nel tempo</p>
+</header>
+
+<div class="section">
+  <h2>Chi siamo</h2>
+
+  <p>
+    BENZ&Co nasce con l’obiettivo di offrire veicoli usati selezionati con
+    estrema attenzione alla qualità, alla sicurezza e alla trasparenza.
+  </p>
+
+  <p>
+    Ogni auto viene accuratamente controllata per garantire ai nostri clienti
+    un acquisto affidabile e senza sorprese.
+  </p>
+
+  <p>
+    Siamo pronti ad accompagnarti in ogni fase della scelta,
+    dall’individuazione del veicolo ideale fino al post-vendita.
+  </p>
+
+  <p>
+    Affidabilità, qualità e serietà sono i valori che guidano il nostro lavoro
+    ogni giorno.
+  </p>
+
+  <button onclick="window.location.href='contatti.html'">
+    Contattaci
+  </button>
+</div>
+
+<footer>
+  © 2025 BENZ&Co · Affidabilità, Qualità e Serietà
+</footer>
+
+</body>
+</html>
