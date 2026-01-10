@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Servizi | BENZ&Co</title>
+<link rel="icon" type="image/jpeg" href="immagini/logo2.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary-black: #111;
+    --border-color: #e0e0e0;
+    --accent-gray: #777;
+}
+
+*{ box-sizing:border-box; font-family:'Poppins',sans-serif; }
+body{ margin:0; background:#ffffff; color:var(--primary-black); }
+
+/* HEADER (Consistente con il resto del sito) */
+header { 
+    background: rgba(0,0,0,0.95); 
+    backdrop-filter: blur(5px);
+    color:#fff; 
+    padding: 15px 20px; 
+    text-align:center; 
+    position:sticky; 
+    top:0; 
+    z-index:100;
+}
+
+header img { height: 100px; display:block; margin:0 auto 10px; }
+
+nav { display:flex; justify-content:center; gap:10px; margin-top: 5px; flex-wrap: wrap; }
+nav button { 
+    background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.3); 
+    padding:8px 16px; border-radius:20px; cursor:pointer; font-size: 13px; font-weight: 500; transition:.3s; 
+}
+nav button:hover { background:#fff; color:#000; }
+
+/* SEZIONE SERVIZI - REDESIGN MINIMALIST */
+.container { max-width: 900px; margin: 80px auto; padding: 0 20px; }
+
+.intro-header { text-align: left; margin-bottom: 60px; }
+.intro-header h1 { font-size: 42px; font-weight: 700; margin: 0; letter-spacing: -1px; }
+.intro-header p { color: var(--accent-gray); font-size: 18px; margin-top: 10px; }
+
+/* LISTA SERVIZI */
+.services-list { border-top: 1px solid var(--border-color); }
+
+.service-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.4s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-content { flex: 1; transition: transform 0.4s ease; }
+
+.service-row h2 { 
+    font-size: 24px; 
+    font-weight: 600; 
+    margin: 0; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+.service-row p { 
+    font-size: 15px; 
+    color: var(--accent-gray); 
+    margin: 10px 0 0 0; 
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* EFFETTO HOVER */
+.service-row:hover { padding-left: 20px; }
+.service-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: #000;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+.service-row:hover::before { transform: scaleY(1); }
+
+/* NUMERAZIONE DISCRETA */
+.service-number {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ddd;
+    margin-right: 40px;
+}
+
+/* FOOTER */
+footer { background:#000; color:#666; text-align:center; padding:60px 20px; font-size:13px; margin-top: 100px; }
+
+@media (max-width: 768px) {
+    .intro-header h1 { font-size: 32px; }
+    .service-row { flex-direction: column; align-items: flex-start; padding: 30px 0; }
+    .service-number { margin-bottom: 10px; }
+    header img { height: 80px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="immagini/logo.png" alt="Logo BENZ&Co">
+    <nav>
+        <button onclick="location.href='index.html'">Home</button>
+        <button onclick="location.href='chi-siamo.html'">Chi siamo</button>
+        <button onclick="location.href='servizi.html'" style="background:#fff; color:#000;">Servizi</button>
+        <button onclick="location.href='dove.html'">Dove</button>
+        <button onclick="location.href='contatti.html'">Contatti</button>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="intro-header">
+        <h1>Servizi</h1>
+        <p>Esperienza e supporto dedicato per ogni fase del tuo acquisto.</p>
+    </div>
+
+    <div class="services-list">
+        
+        <div class="service-row">
+            <div class="service-number">01</div>
+            <div class="service-content">
+                <h2>Permuta dell’usato</h2>
+                <p>Valutazione professionale del tuo veicolo attuale con quotazioni aggiornate, agevolando l'acquisto della tua prossima vettura.</p>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <div class="service-number">02</div>
+            <div class="service-content">
+                <h2>Finanziamento e Leasing</h2>
+                <p>Piani finanziari per privati e aziende, con soluzioni di pagamento personalizzabili.</p>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <div class="service-number">03</div>
+            <div class="service-content">
+                <h2>Consegna a domicilio</h2>
+                <p>Consegna del veicolo in tutto il territorio nazionale, garantendo integrità e puntualità.</p>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <div class="service-number">04</div>
+            <div class="service-content">
+                <h2>Passaggio di proprietà</h2>
+                <p>Esecuzione del passaggio di proprietà presso la nostra sede per una gestione burocratica rapida e sicura. (Sabato escluso)</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div style="margin-bottom: 10px; color: #fff; font-weight: 600;">BENZ&Co</div>
+    © 2026 · Affidabilità, Qualità e Serietà
+</footer>
+
+</body>
+</html>
