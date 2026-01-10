@@ -3,106 +3,225 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BENZ&Co</title>
+<title>BENZ&Co | Auto & Veicoli</title>
 <link rel="icon" type="image/jpeg" href="immagini/logo2.png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-
-  
 <style>
-/* ... (Tutto il tuo CSS precedente rimane invariato fino a .card img) ... */
-*{ box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body{ margin:0; background:#f5f5f5; color:#111; }
-header{ background:#000; color:#fff; padding:10px 20px; text-align:center; position:sticky; top:0; z-index:100; }
-header img{ height:190px; display:block; margin:0 auto 5px; }
-nav{ margin-top:-50px; display:flex; justify-content:center; gap:22px; }
-nav button{ background:transparent; color:#fff; border:1px solid #fff; padding:10px 22px; border-radius:30px; cursor:pointer; transition:.3s; }
-nav button:hover{ background:#fff; color:#000; }
-.container{ max-width:1300px; margin:auto; padding:55px 20px; }
-.filters{ display:flex; justify-content:center; gap:26px; flex-wrap:wrap; background:#fff; padding:35px 30px; border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.08); margin-bottom:55px; }
-.filters div{text-align:center;}
-.filters label{ font-size:15px; font-weight:500; }
-select{ margin-top:10px; padding:16px 22px; min-width:170px; border-radius:40px; border:1px solid #bbb; font-size:15px; }
-.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:35px; }
-
-/* MODIFICHE ALLA CARD E IMMAGINE */
-.card{
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 20px 50px rgba(0,0,0,.12);
-  cursor:pointer;
-  max-width:320px;
-  height:390px;
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  transition:.35s;
+:root {
+    --primary-black: #111;
+    --accent-gray: #fcfcfc;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-.card:hover{ transform:translateY(-8px); }
+*{ box-sizing:border-box; font-family:'Poppins',sans-serif; }
+body{ margin:0; background:#f8f9fa; color:var(--primary-black); }
 
-/* Contenitore immagine per gestire il caricamento */
+/* HEADER REDESIGN */
+header { 
+    background: rgba(0,0,0,0.95); 
+    backdrop-filter: blur(1px);
+    color:#fff; 
+    padding: 15px 20px; 
+    text-align:center; 
+    position:sticky; 
+    top:0; 
+    z-index:100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+header img { 
+    height: 100px; 
+    display:block; 
+    margin:0 auto 10px; 
+    transition: 0.3s;
+}
+
+nav { 
+    display:flex; 
+    justify-content:center; 
+    gap:10px; 
+    margin-top: 5px;
+    flex-wrap: wrap; /* Permette ai tasti di andare a capo su schermi molto piccoli */
+}
+
+nav button { 
+    background:rgba(255,255,255,0.1); 
+    color:#fff; 
+    border:1px solid rgba(255,255,255,0.3); 
+    padding:8px 16px; 
+    border-radius:20px; 
+    cursor:pointer; 
+    font-size: 13px;
+    font-weight: 500;
+    transition:.3s; 
+}
+
+nav button:hover { background:#fff; color:#000; border-color: #fff; }
+
+/* CONTAINER PRINCIPALE */
+.container { max-width:1300px; margin:auto; padding:30px 15px; }
+
+/* FILTRI REDESIGN */
+.filters { 
+    display:flex; 
+    justify-content:center; 
+    gap:15px; 
+    flex-wrap:wrap; 
+    background:#fff; 
+    padding:25px; 
+    border-radius:20px; 
+    box-shadow: var(--shadow); 
+    margin-bottom:40px; 
+}
+
+.filters div { text-align:left; flex: 1 1 180px; }
+.filters label { font-size:13px; font-weight:600; text-transform: uppercase; color: #666; margin-left: 10px; }
+
+select { 
+    margin-top:6px; 
+    padding:12px 18px; 
+    width: 100%;
+    border-radius:12px; 
+    border:1px solid #eee; 
+    background: #fdfdfd;
+    font-size:14px; 
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+select:focus { border-color: #000; box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+
+/* GRID E CARDS */
+.grid { 
+    display:grid; 
+    grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); 
+    gap:25px; 
+}
+
+.card {
+    background:#fff;
+    border-radius:24px;
+    box-shadow: var(--shadow);
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border: 1px solid #f0f0f0;
+}
+
+.card:hover { transform:translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+
 .img-container {
-  width: 100%;
-  height: 185px;
-  position: relative;
-  background: #eee; /* Colore di sfondo mentre carica */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+    width: 100%;
+    height: 220px; 
+    position: relative;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0; /* Inizialmente invisibile */
-  transition: opacity 0.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease;
 }
 
-/* Lo Spinner di caricamento */
 .loader {
-  width: 30px;
-  height: 30px;
-  border: 3px solid #ddd;
-  border-top: 3px solid #333;
-  border-radius: 50%;
-  position: absolute;
-  animation: spin 1s linear infinite;
+    width: 25px;
+    height: 25px;
+    border: 3px solid #ddd;
+    border-top: 3px solid #000;
+    border-radius: 50%;
+    position: absolute;
+    animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.card-content { padding: 20px; flex:1; display:flex; flex-direction:column; text-align:left; }
+
+.card-content h3 { 
+    margin:0; 
+    font-size:17px; 
+    font-weight:600; 
+    color: #111;
+    line-height:1.4; 
+    height: 48px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
-.card-content{ padding:16px 20px; flex:1; display:flex; flex-direction:column; justify-content:space-between; text-align:center; }
-.card-content h3{ margin:0; font-size:16px; font-weight:500; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:42px; }
-.card-info{ display:flex; justify-content:center; gap:8px; margin:10px 0; flex-wrap:wrap; }
-.card-info span{ background:#eee; padding:5px 10px; border-radius:14px; font-size:12px; font-weight:500; }
-.price{ font-size:18px; font-weight:600; margin-top:10px; }
-.empty-message{ grid-column:1/-1; text-align:center; padding:60px; font-size:18px; color:#777; }
-footer{ background:#000; color:#aaa; text-align:center; padding:22px; font-size:13px; }
+.card-info { display:flex; gap:6px; margin:15px 0; flex-wrap:wrap; }
+
+.card-info span { 
+    background:#f0f0f0; 
+    color: #555;
+    padding:4px 12px; 
+    border-radius:8px; 
+    font-size:11px; 
+    font-weight:600; 
+    text-transform: uppercase;
+}
+
+.price { 
+    font-size:20px; 
+    font-weight:700; 
+    color:#000;
+    margin-top:auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price::after {
+    content: 'Dettagli ›';
+    font-size: 12px;
+    font-weight: 400;
+    color: #999;
+}
+
+.empty-message { grid-column:1/-1; text-align:center; padding:100px 20px; font-size:18px; color:#aaa; }
+
+footer { background:#000; color:#666; text-align:center; padding:40px 20px; font-size:13px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    header img { height: 80px; }
+    .filters { padding: 15px; gap: 10px; }
+    .filters div { flex: 1 1 140px; }
+    .grid { grid-template-columns: 1fr; }
+    .card { max-width: 100%; }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <img src="immagini/logo.jpeg" alt="Logo BENZ&Co">
-  <nav>
-    <button onclick="location.href='index.html'">Home</button>
-    <button onclick="location.href='chi-siamo.html'">Chi siamo</button>
-    <button onclick="location.href='contatti.html'">Contatti</button>
-  </nav>
+    <img src="immagini/logo.png" alt="Logo BENZ&Co">
+    <nav>
+        <button onclick="location.href='index.html'">Home</button>
+        <button onclick="location.href='chi-siamo.html'">Chi siamo</button>
+        <button onclick="location.href='servizi.html'">Servizi</button>
+        <button onclick="location.href='dove.html'">Dove</button>
+        <button onclick="location.href='contatti.html'">Contatti</button>
+    </nav>
 </header>
 
 <div class="container">
     <div class="filters">
         <div>
-          <label>Marca</label><br>
+          <label>Marca</label>
           <select id="modelFilter" onchange="filterCars()">
             <option value="">Tutte</option>
             <option>Lancia</option>
@@ -119,7 +238,7 @@ footer{ background:#000; color:#aaa; text-align:center; padding:22px; font-size:
           </select>
         </div>
         <div>
-          <label>Alimentazione</label><br>
+          <label>Alimentazione</label>
           <select id="fuelFilter" onchange="filterCars()">
             <option value="">Tutte</option>
             <option>Diesel</option>
@@ -129,7 +248,7 @@ footer{ background:#000; color:#aaa; text-align:center; padding:22px; font-size:
           </select>
         </div>
         <div>
-          <label>Tipologia</label><br>
+          <label>Tipologia</label>
           <select id="typeFilter" onchange="filterCars()">
             <option value="">Tutte</option>
             <option>Berlina</option>
@@ -139,16 +258,16 @@ footer{ background:#000; color:#aaa; text-align:center; padding:22px; font-size:
           </select>
         </div>
         <div>
-          <label>Cambio</label><br>
+          <label>Cambio</label>
           <select id="gearFilter" onchange="filterCars()">
             <option value="">Tutti</option>
             <option>Manuale</option>
             <option>Automatico</option>
-            <option>Semiutomatico</option>
+            <option>Semiautomatico</option>
           </select>
         </div>
         <div>
-          <label>Colore</label><br>
+          <label>Colore</label>
           <select id="colorFilter" onchange="filterCars()">
             <option value="">Tutti</option>
             <option>Nero</option>
@@ -163,80 +282,77 @@ footer{ background:#000; color:#aaa; text-align:center; padding:22px; font-size:
 </div>
 
 <footer>
-© 2025 BENZ&Co · Affidabilità, Qualità e Serietà
+    <div style="margin-bottom: 10px; color: #fff; font-weight: 600;">BENZ&Co</div>
+    © 2025 · Affidabilità, Qualità e Serietà
 </footer>
 
 <script>
-// I tuoi dati rimangono gli stessi
 const carsData=[
   {model:['Lancia'],type:'Berlina',fuel:'Metano',gear:'Manuale',color:'Blu',title:'Lancia Ypsilon 2017 0.9 Metano',price:'€ 5.999',image:'ypsilon.png',page:'lancia-ypsilon.html'},
-  {model:['Peugeot'],type:'Station Wagon',fuel:'Diesel',gear:'Automatico',color:'Nero',title:'Peugeot 308 sw 1.5 hdi [NUOVA] [GARANZIA PEUGEOT]',price:'€ 24.700',image:'peugeot308.jpg',page:'peugeot308.html'},
+  {model:['Peugeot'],type:'Station Wagon',fuel:'Diesel',gear:'Automatico',color:'Nero',title:'Peugeot 308 sw 1.5 hdi [NUOVA]',price:'€ 24.700',image:'peugeot308.jpg',page:'peugeot308.html'},
   {model:['Peugeot'],type:'Berlina',fuel:'Elettrica',gear:'Automatico',color:'Bianco',title:'Peugeot e-208 Active 100kW my20',price:'€ 13.500',image:'p208.jpg',page:'peugeot208.html'},
-  {model:['Land Rover'],type:'SUV',fuel:'Diesel',gear:'Manuale',color:'Nero',title:'Land Rover Freelander TD4 16v Cat SPORT Cabrio',price:'€ 2.999',image:'fl.jpg',page:'freelander.html'},
-  {model:['BMW'],type:'Berlina',fuel:'Benzina',gear:'Automatico',color:'Nero',title:'BMW M3 Competition [GARANZIA BMW FINO AL 2027]',price:'€ 99.999',image:'m3.jpg',page:'m3.html'},
-  {model:['Audi'],type:'Berlina',fuel:'Benzina',gear:'Semiautomatico',color:'Nero',title:'Audi RS3 Sportback [GARANZIA AUDI FINO AL 2027]',price:'€ 52.900',image:'rs3.webp',page:'rs3.html'},
-  {model:['Alfa Romeo'],type:'Berlina',fuel:'Benzina',gear:'Manuale',color:'Rosso',title:'Alfa Romeo Giulia 2.9 t V6 Quadrifoglio 510cv',price:'€ 54.800',image:'ar.jpg',page:'alfaromeo.html'},
-  {model:['Fiat'],type:'Furgone',fuel:'Metano',gear:'Manuale',color:'Bianco',title:'Fiat Doblo 1.4 tjet 16v Natural Power 120cv',price:'€ 4.300',image:'doblo.jpg',page:'doblo.html'},
+  {model:['Land Rover'],type:'SUV',fuel:'Diesel',gear:'Manuale',color:'Nero',title:'Land Rover Freelander TD4 16v Cat SPORT',price:'€ 2.999',image:'fl.jpg',page:'freelander.html'},
+  {model:['BMW'],type:'Berlina',fuel:'Benzina',gear:'Automatico',color:'Nero',title:'BMW M3 Competition [GARANZIA 2027]',price:'€ 99.999',image:'m3.jpg',page:'m3.html'},
+  {model:['Audi'],type:'Berlina',fuel:'Benzina',gear:'Semiautomatico',color:'Nero',title:'Audi RS3 Sportback [GARANZIA 2027]',price:'€ 52.900',image:'rs3.webp',page:'rs3.html'},
+  {model:['Alfa Romeo'],type:'Berlina',fuel:'Benzina',gear:'Manuale',color:'Rosso',title:'Alfa Romeo Giulia Quadrifoglio 510cv',price:'€ 54.800',image:'ar.jpg',page:'alfaromeo.html'},
+  {model:['Fiat'],type:'Furgone',fuel:'Metano',gear:'Manuale',color:'Bianco',title:'Fiat Doblo 1.4 tjet Natural Power 120cv',price:'€ 4.300',image:'doblo.jpg',page:'doblo.html'},
   {model:['Volkswagen'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Volkswagen LT46 [GEMELLATO]',price:'€ 4.400',image:'lt46.jpg',page:'lt46.html'},
-  {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Rosso',title:'Fiat Fiorino 1.3 MJT 95CV Adventure E5+',price:'€ 3.802',image:'fiorinorosso.png',page:'fiorinorosso.html'},
-  {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato 33 CH1 2.3 Multijet 120CV E6D-temp',price:'€ 10.499',image:'ducato33ch1.png',page:'ducato33ch1.html'},
-  {model:['Iveco'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Iveco Daily ATP 2028 35C18 3.0 180CV Frigo Thermo King',price:'€ 18.400',image:'daily.png',page:'daily.html'},
-  {model:['Peugeot', 'Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato | Peugeot Boxer BlueHDi 130CV L3H2',price:'€ 10.999',image:'boxer.png',page:'boxer.html'},
+  {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Rosso',title:'Fiat Fiorino 1.3 MJT 95CV Adventure',price:'€ 3.802',image:'fiorinorosso.png',page:'fiorinorosso.html'},
+  {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato 33 CH1 2.3 Multijet 120CV',price:'€ 10.499',image:'ducato33ch1.png',page:'ducato33ch1.html'},
+  {model:['Iveco'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Iveco Daily ATP 2028 3.0 180CV Frigo',price:'€ 18.400',image:'daily.png',page:'daily.html'},
+  {model:['Peugeot', 'Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato | Peugeot Boxer 130CV L3H2',price:'€ 10.999',image:'boxer.png',page:'boxer.html'},
   {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato Maxi L3H2 150CV',price:'€ 9.999',image:'maxil3h2.jpg',page:'maxil3h2.html'},
-  {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato L3H2 2.3 MJT 140CV [MOTORE NUOVO]',price:'€ 12.999',image:'ducatomotore.png',page:'motorenuovo.html'},
-  {model:['Citroën', 'Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato | Citroën Jumper 35 L2H2 BlueHDi 140 CV',price:'€ 10.600',image:'jumper.png',page:'jumper.html'},
-  {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato Maxi 35 xl L4 H2 2.2 MJT³ 140CV',price:'€ 15.899',image:'rosso.png',page:'rosso.html'}
+  {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato L3H2 2.3 140CV [MOTORE NUOVO]',price:'€ 12.999',image:'ducatomotore.png',page:'motorenuovo.html'},
+  {model:['Citroën', 'Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato | Citroën Jumper L2H2 140 CV',price:'€ 10.600',image:'jumper.png',page:'jumper.html'},
+  {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato Maxi 35 xl L4 H2 140CV',price:'€ 15.899',image:'rosso.png',page:'rosso.html'}
 ];
 
 const grid=document.getElementById('carGrid');
 
 function filterCars(){
-  grid.innerHTML='';
-  const modelVal=document.getElementById('modelFilter').value;
-  const fuelVal=document.getElementById('fuelFilter').value;
-  const typeVal=document.getElementById('typeFilter').value;
-  const gearVal=document.getElementById('gearFilter').value;
-  const colorVal=document.getElementById('colorFilter').value;
+    grid.innerHTML='';
+    const modelVal=document.getElementById('modelFilter').value;
+    const fuelVal=document.getElementById('fuelFilter').value;
+    const typeVal=document.getElementById('typeFilter').value;
+    const gearVal=document.getElementById('gearFilter').value;
+    const colorVal=document.getElementById('colorFilter').value;
 
-  const filtered=carsData.filter(c=>
-    (!modelVal || c.model.includes(modelVal)) &&
-    (!fuelVal || c.fuel === fuelVal) &&
-    (!typeVal || c.type === typeVal) &&
-    (!gearVal || c.gear === gearVal) &&
-    (!colorVal || c.color === colorVal)
-  );
+    const filtered=carsData.filter(c=>
+        (!modelVal || c.model.includes(modelVal)) &&
+        (!fuelVal || c.fuel === fuelVal) &&
+        (!typeVal || c.type === typeVal) &&
+        (!gearVal || c.gear === gearVal) &&
+        (!colorVal || c.color === colorVal)
+    );
 
-  if(!filtered.length){
-    grid.innerHTML='<div class="empty-message">Nessun veicolo disponibile</div>';
-    return;
-  }
+    if(!filtered.length){
+        grid.innerHTML='<div class="empty-message">Nessun veicolo disponibile con questi filtri</div>';
+        return;
+    }
 
-  filtered.forEach(c=>{
-    const card=document.createElement('div');
-    card.className='card';
-    
-    // Struttura con contenitore immagine e loader
-    card.innerHTML=`
-      <div class="img-container">
-        <div class="loader"></div>
-        <img src="immagini/${c.image}" alt="${c.title}" onload="revealImage(this)">
-      </div>
-      <div class="card-content">
-        <h3>${c.title}</h3>
-        <div class="card-info">
-          <span>${c.type}</span>
-          <span>${c.fuel}</span>
-          <span>${c.gear}</span>
-        </div>
-        <div class="price">${c.price}</div>
-      </div>`;
-    
-    card.onclick=()=>window.open(c.page,'_blank');
-    grid.appendChild(card);
-  });
+    filtered.forEach(c=>{
+        const card=document.createElement('div');
+        card.className='card';
+        card.innerHTML=`
+            <div class="img-container">
+                <div class="loader"></div>
+                <img src="immagini/${c.image}" alt="${c.title}" onload="revealImage(this)">
+            </div>
+            <div class="card-content">
+                <h3>${c.title}</h3>
+                <div class="card-info">
+                    <span>${c.type}</span>
+                    <span>${c.fuel}</span>
+                    <span>${c.gear}</span>
+                </div>
+                <div class="price">${c.price}</div>
+            </div>`;
+        
+        card.onclick=()=>window.open(c.page,'_blank');
+        grid.appendChild(card);
+    });
 }
 
-// Funzione che nasconde il loader e mostra l'immagine quando è pronta
 function revealImage(imgElement) {
     const loader = imgElement.parentElement.querySelector('.loader');
     if(loader) loader.style.display = 'none';
