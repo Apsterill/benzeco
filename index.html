@@ -10,17 +10,17 @@
 <style>
 :root {
     --primary-black: #111;
-    --accent-gray: #fcfcfc;
+    --accent-yellow: #ffcc00; 
     --shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 *{ box-sizing:border-box; font-family:'Poppins',sans-serif; }
 body{ margin:0; background:#f8f9fa; color:var(--primary-black); overflow-x: hidden; }
 
-/* HEADER - Ripristinato Blur Nero */
+/* HEADER - Blur Nero */
 header { 
-    background: rgba(0,0,0,0.9); /* Sfondo scuro */
-    backdrop-filter: blur(15px); /* Effetto sfocato dietro */
+    background: rgba(0,0,0,0.9); 
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     color:#fff; 
     padding: 15px 20px; 
@@ -65,7 +65,6 @@ select {
 }
 
 select:active, select:focus { transform: scale(0.98) translateY(2px); border-color: #000; }
-select:hover { border-color: #ddd; background-color: #fff; transform: translateY(-2px); }
 
 /* GRID E CARDS */
 .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:25px; }
@@ -81,46 +80,30 @@ select:hover { border-color: #ddd; background-color: #fff; transform: translateY
 
 .card:hover { transform:translateY(-12px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
 
-/* LOADING STATE ELEGANTE */
-.img-container { 
-    width: 100%; height: 220px; position: relative; 
-    background: #f3f3f3; 
-    display: flex; align-items: center; justify-content: center; overflow: hidden; 
+/* STILE ULTIMO ARRIVO */
+.card.new-arrival { background: #fffbef; border: 2px solid var(--accent-yellow); }
+.badge-new {
+    position: absolute; top: 15px; left: 15px; background: var(--accent-yellow); color: #000;
+    padding: 6px 14px; border-radius: 12px; font-size: 11px; font-weight: 800;
+    text-transform: uppercase; z-index: 10; animation: pulseGlow 2s infinite;
 }
 
-.img-container::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -150%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-    animation: shimmer 1.5s infinite;
+@keyframes pulseGlow {
+    0% { transform: scale(1); box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255, 204, 0, 0.6); }
+    100% { transform: scale(1); box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4); }
 }
 
+/* LOADING STATE */
+.img-container { width: 100%; height: 220px; position: relative; background: #f3f3f3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.img-container::before { content: ""; position: absolute; top: 0; left: -150%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); animation: shimmer 1.5s infinite; }
 @keyframes shimmer { 100% { left: 150%; } }
 
-.loader { 
-    width: 30px; height: 30px; 
-    border: 2px solid rgba(0,0,0,0.05); 
-    border-top: 2px solid #111; 
-    border-radius: 50%; 
-    position: absolute; 
-    z-index: 2;
-    animation: spin 0.8s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite; 
-}
+.loader { width: 30px; height: 30px; border: 2px solid rgba(0,0,0,0.05); border-top: 2px solid #111; border-radius: 50%; position: absolute; z-index: 2; animation: spin 0.8s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite; }
 
-.card img { 
-    width: 100%; height: 100%; object-fit: cover; 
-    opacity: 0; 
-    filter: blur(8px);
-    transition: opacity 0.7s ease, filter 0.7s ease, transform 0.8s ease; 
-    z-index: 1;
-}
-
+.card img { width: 100%; height: 100%; object-fit: cover; opacity: 0; filter: blur(8px); transition: opacity 0.7s ease, filter 0.7s ease, transform 0.8s ease; z-index: 1; }
 .img-loaded img { opacity: 1; filter: blur(0); }
 .img-loaded::before, .img-loaded .loader { display: none; }
-
-.card:hover img { transform: scale(1.08); }
 
 /* ANIMAZIONI */
 @keyframes slideDown { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
@@ -130,21 +113,12 @@ select:hover { border-color: #ddd; background-color: #fff; transform: translateY
 .card-content { padding: 20px; flex:1; display:flex; flex-direction:column; text-align:left; }
 .card-content h3 { margin:0; font-size:17px; font-weight:600; color: #111; line-height:1.4; height: 48px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .card-info { display:flex; gap:6px; margin:15px 0; flex-wrap:wrap; }
-.card-info span { background:#f0f0f0; color: #555; padding:5px 14px; border-radius:12px; font-size:11px; font-weight:600; text-transform: uppercase; }
+.card-info span { background:rgba(0,0,0,0.05); color: #555; padding:5px 14px; border-radius:12px; font-size:11px; font-weight:600; text-transform: uppercase; }
 .price { font-size:20px; font-weight:700; color:#000; margin-top:auto; display: flex; align-items: center; justify-content: space-between; }
-.price::after { content: 'Dettagli ›'; font-size: 12px; font-weight: 500; color: #000; background: #f0f0f0; padding: 5px 12px; border-radius: 15px; transition: 0.3s; }
+.price::after { content: 'Dettagli ›'; font-size: 12px; font-weight: 500; color: #000; background: rgba(0,0,0,0.05); padding: 5px 12px; border-radius: 15px; transition: 0.3s; }
 .card:hover .price::after { background: #000; color: #fff; }
 
-.empty-message { grid-column:1/-1; text-align:center; padding:100px 20px; font-size:18px; color:#aaa; }
-
 footer { background:#000; color:#666; text-align:center; padding:40px 20px; font-size:13px; }
-
-@media (max-width: 768px) {
-    header img { height: 80px; }
-    .filters { padding: 15px; gap: 10px; border-radius: 20px; }
-    .filters div { flex: 1 1 140px; }
-    .grid { grid-template-columns: 1fr; }
-}
 </style>
 </head>
 
@@ -167,60 +141,24 @@ footer { background:#000; color:#666; text-align:center; padding:40px 20px; font
           <label>Marca</label>
           <select id="modelFilter" onchange="filterCars()">
             <option value="">Tutte</option>
-            <option>Lancia</option>
+            <option>Alfa Romeo</option>
+            <option>Audi</option>
+            <option>BMW</option>
+            <option>Citroën</option>
             <option>Fiat</option>
             <option>Iveco</option>
-            <option>Volkswagen</option>
-            <option>Audi</option>
-            <option>Alfa Romeo</option>
-            <option>BMW</option>
-            <option>Peugeot</option>
-            <option>Land Rover</option>
-            <option>Citroën</option>
+            <option>Jeep</option> <option>Land Rover</option>
+            <option>Lancia</option>
+            <option>Mercedes</option> <option>Peugeot</option>
             <option>Renault</option>
+            <option>Volkswagen</option>
           </select>
         </div>
-        <div>
-          <label>Alimentazione</label>
-          <select id="fuelFilter" onchange="filterCars()">
-            <option value="">Tutte</option>
-            <option>Diesel</option>
-            <option>Benzina</option>
-            <option>Metano</option>
-            <option>Elettrica</option>
-          </select>
-        </div>
-        <div>
-          <label>Tipologia</label>
-          <select id="typeFilter" onchange="filterCars()">
-            <option value="">Tutte</option>
-            <option>Berlina</option>
-            <option>SUV</option>
-            <option>Station Wagon</option>
-            <option>Furgone</option>
-          </select>
-        </div>
-        <div>
-          <label>Cambio</label>
-          <select id="gearFilter" onchange="filterCars()">
-            <option value="">Tutti</option>
-            <option>Manuale</option>
-            <option>Automatico</option>
-            <option>Semiautomatico</option>
-          </select>
-        </div>
-        <div>
-          <label>Colore</label>
-          <select id="colorFilter" onchange="filterCars()">
-            <option value="">Tutti</option>
-            <option>Nero</option>
-            <option>Bianco</option>
-            <option>Blu</option>
-            <option>Rosso</option>
-          </select>
-        </div>
+        <div><label>Alimentazione</label><select id="fuelFilter" onchange="filterCars()"><option value="">Tutte</option><option>Diesel</option><option>Benzina</option><option>Metano</option><option>Elettrica</option></select></div>
+        <div><label>Tipologia</label><select id="typeFilter" onchange="filterCars()"><option value="">Tutte</option><option>Berlina</option><option>SUV</option><option>Station Wagon</option><option>Furgone</option></select></div>
+        <div><label>Cambio</label><select id="gearFilter" onchange="filterCars()"><option value="">Tutti</option><option>Manuale</option><option>Automatico</option><option>Semiautomatico</option></select></div>
+        <div><label>Colore</label><select id="colorFilter" onchange="filterCars()"><option value="">Tutti</option><option>Nero</option><option>Bianco</option><option>Blu</option><option>Rosso</option><option>Grigio</option></select></div>
     </div>
-
     <div class="grid" id="carGrid"></div>
 </div>
 
@@ -231,8 +169,8 @@ footer { background:#000; color:#666; text-align:center; padding:40px 20px; font
 
 <script>
 const carsData=[
-  {model:['Lancia'],type:'Berlina',fuel:'Metano',gear:'Manuale',color:'Blu',title:'Lancia Ypsilon 2017 0.9 Metano',price:'€ 5.999',image:'ypsilon.png',page:'lancia-ypsilon.html'},
-  {model:['Peugeot'],type:'Station Wagon',fuel:'Diesel',gear:'Automatico',color:'Nero',title:'Peugeot 308 sw 1.5 hdi [NUOVA]',price:'€ 24.700',image:'peugeot308.jpg',page:'peugeot308.html'},
+  {model:['Lancia'],type:'Berlina',fuel:'Metano',gear:'Manuale',color:'Blu',title:'Lancia Ypsilon 2017 0.9 Metano',price:'€ 5.999',image:'ypsilon.png',page:'lancia-ypsilon.html', ultimoArrivo:false},
+  {model:['Peugeot'],type:'Station Wagon',fuel:'Diesel',gear:'Automatico',color:'Nero',title:'Peugeot 308 sw 1.5 hdi [NUOVA]',price:'€ 24.700',image:'peugeot308.jpg',page:'peugeot308.html', ultimoArrivo:false},
   {model:['Peugeot'],type:'Berlina',fuel:'Elettrica',gear:'Automatico',color:'Bianco',title:'Peugeot e-208 Active 100kW my20',price:'€ 13.500',image:'p208.jpg',page:'peugeot208.html'},
   {model:['Land Rover'],type:'SUV',fuel:'Diesel',gear:'Manuale',color:'Nero',title:'Land Rover Freelander TD4 16v Cat SPORT',price:'€ 2.999',image:'fl.jpg',page:'freelander.html'},
   {model:['BMW'],type:'Berlina',fuel:'Benzina',gear:'Automatico',color:'Nero',title:'BMW M3 Competition [GARANZIA 2027]',price:'€ 99.999',image:'m3.jpg',page:'m3.html'},
@@ -247,6 +185,7 @@ const carsData=[
   {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato Maxi L3H2 150CV',price:'€ 9.999',image:'maxil3h2.jpg',page:'maxil3h2.html'},
   {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato L3H2 2.3 140CV [MOTORE NUOVO]',price:'€ 12.999',image:'ducatomotore.png',page:'motorenuovo.html'},
   {model:['Citroën', 'Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato | Citroën Jumper L2H2 140 CV',price:'€ 10.600',image:'jumper.png',page:'jumper.html'},
+  {model:['Jeep'],type:'SUV',fuel:'Diesel',gear:'Manuale',color:'Grigio',title:'Jeep Compass 1.6 mjt Business 2wd 130cv',price:'€ 19.500',image:'compass.jpg',page:'compass.html', ultimoArrivo:true},
   {model:['Fiat'],type:'Furgone',fuel:'Diesel',gear:'Manuale',color:'Bianco',title:'Fiat Ducato Maxi 35 xl L4 H2 140CV',price:'€ 15.899',image:'rosso.png',page:'rosso.html'}
 ];
 
@@ -260,7 +199,7 @@ function filterCars(){
     const gearVal=document.getElementById('gearFilter').value;
     const colorVal=document.getElementById('colorFilter').value;
 
-    const filtered=carsData.filter(c=>
+    let filtered=carsData.filter(c=>
         (!modelVal || c.model.includes(modelVal)) &&
         (!fuelVal || c.fuel === fuelVal) &&
         (!typeVal || c.type === typeVal) &&
@@ -268,17 +207,21 @@ function filterCars(){
         (!colorVal || c.color === colorVal)
     );
 
+    filtered.sort((a, b) => (b.ultimoArrivo ? 1 : 0) - (a.ultimoArrivo ? 1 : 0));
+
     if(!filtered.length){
         grid.innerHTML='<div class="empty-message">Nessun veicolo disponibile con questi filtri</div>';
         return;
     }
 
     filtered.forEach((c, index)=>{
+        const isNew = c.ultimoArrivo === true;
         const card=document.createElement('div');
-        card.className='card';
+        card.className = `card ${isNew ? 'new-arrival' : ''}`;
         card.style.animationDelay = `${index * 0.08}s`;
         card.innerHTML=`
             <div class="img-container">
+                ${isNew ? '<div class="badge-new">Ultimo Arrivo</div>' : ''}
                 <div class="loader"></div>
                 <img src="immagini/${c.image}" alt="${c.title}" onload="revealImage(this)">
             </div>
