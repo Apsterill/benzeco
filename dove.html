@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dove siamo | BENZ&Co</title>
+<link rel="icon" type="image/jpeg" href="immagini/logo2.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary-black: #111;
+    --accent-gray: #fcfcfc;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+*{ box-sizing:border-box; font-family:'Poppins',sans-serif; }
+body{ margin:0; background:#f8f9fa; color:var(--primary-black); }
+
+/* HEADER (Uniformato a tutto il sito) */
+header { 
+    background: rgba(0,0,0,0.95); 
+    backdrop-filter: blur(1px);
+    color:#fff; 
+    padding: 15px 20px; 
+    text-align:center; 
+    position:sticky; 
+    top:0; 
+    z-index:100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+header img { 
+    height: 100px; 
+    display:block; 
+    margin:0 auto 10px; 
+}
+
+nav { 
+    display:flex; 
+    justify-content:center; 
+    gap:10px; 
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+nav button { 
+    background:rgba(255,255,255,0.1); 
+    color:#fff; 
+    border:1px solid rgba(255,255,255,0.3); 
+    padding:8px 16px; 
+    border-radius:20px; 
+    cursor:pointer; 
+    font-size: 13px;
+    font-weight: 500;
+    transition:.3s; 
+}
+
+nav button:hover { background:#fff; color:#000; border-color: #fff; }
+
+/* SEZIONE DOVE SIAMO */
+.container { 
+    max-width: 1000px; 
+    margin: 60px auto; 
+    padding: 0 20px; 
+    text-align: center;
+}
+
+.map-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid #f0f0f0;
+}
+
+h1 { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
+.subtitle { color: #666; margin-bottom: 30px; font-size: 16px; }
+
+.address-box {
+    background: #fdfdfd;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    border: 1px dashed #ddd;
+    display: inline-block;
+}
+
+.address-box p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+}
+
+.map-container {
+    width: 100%;
+    height: 450px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.btn-naviga {
+    margin-top: 30px;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-naviga:hover { background: #333; transform: scale(1.05); }
+
+/* FOOTER */
+footer { background:#000; color:#666; text-align:center; padding:40px 20px; font-size:13px; margin-top: 80px; }
+
+@media (max-width: 768px) {
+    header img { height: 80px; }
+    .map-card { padding: 20px; }
+    .map-container { height: 300px; }
+    .address-box p { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="immagini/logo.png" alt="Logo BENZ&Co">
+    <nav>
+        <button onclick="location.href='index.html'">Home</button>
+        <button onclick="location.href='chi-siamo.html'">Chi siamo</button>
+        <button onclick="location.href='servizi.html'">Servizi</button>
+        <button onclick="location.href='dove.html'" style="background:#fff; color:#000;">Dove</button>
+        <button onclick="location.href='contatti.html'">Contatti</button>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="map-card">
+        <h1>Vienici a trovare</h1>
+        <p class="subtitle">La nostra sede si trova in una posizione facilmente raggiungibile.</p>
+
+        <div class="address-box">
+            <p>📍 Via Francesco Perri, 26, 80044 Ottaviano NA</p>
+        </div>
+
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2312!2d14.4789!3d40.8491!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb07998967f25%3A0xc6c8c4a5c5f5f5f5!2sVia%20Francesco%20Perri%2C%2026%2C%2080044%20Ottaviano%20NA!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Via+Francesco+Perri+26+Ottaviano+NA" target="_blank" class="btn-naviga">
+            Apri in Google Maps
+        </a>
+    </div>
+</div>
+
+<footer>
+    <div style="margin-bottom: 10px; color: #fff; font-weight: 600;">BENZ&Co</div>
+    © 2025 · Affidabilità, Qualità e Serietà
+</footer>
+
+</body>
+</html>
