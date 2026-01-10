@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fiat Doblò - BENZ&Co</title>
+<title>Fiat Doblo - BENZ&Co</title>
 <link rel="icon" type="image/jpeg" href="immagini/logo2.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -11,7 +11,7 @@
 *{ box-sizing:border-box; font-family:'Poppins',sans-serif; }
 body{ margin:0; background:#f5f5f5; color:#111; line-height:1.6; overflow-x: hidden; }
 
-/* HEADER UNIFORMATO */
+/* HEADER */
 header { 
     background: rgba(0,0,0,0.95); 
     backdrop-filter: blur(5px);
@@ -23,55 +23,84 @@ header {
     z-index:100;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
-header img { height: 100px; display:block; margin:0 auto 10px; }
-nav { display:flex; justify-content:center; gap:10px; margin-top: 5px; flex-wrap: wrap; }
-nav button { 
-    background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.3); 
-    padding:8px 16px; border-radius:20px; cursor:pointer; font-size: 13px; font-weight: 500; transition:.3s; 
+
+header img { 
+    height: 100px; 
+    display:block; 
+    margin:0 auto 10px; 
+    transition: 0.3s;
 }
-nav button:hover { background:#fff; color:#000; }
+
+nav { 
+    display:flex; 
+    justify-content:center; 
+    gap:10px; 
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+nav button { 
+    background:rgba(255,255,255,0.1); 
+    color:#fff; 
+    border:1px solid rgba(255,255,255,0.3); 
+    padding:8px 16px; 
+    border-radius:20px; 
+    cursor:pointer; 
+    font-size: 13px;
+    font-weight: 500;
+    transition:.3s; 
+}
+
+nav button:hover { background:#fff; color:#000; border-color: #fff; }
 
 /* CONTAINER PRINCIPALE */
 .container{ max-width:900px; margin:50px auto; background:#fff; padding:40px; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,.1); position:relative; }
 
-/* GALLERIA SLIDER CON LOADER */
-.img-wrapper { position: relative; margin-bottom: 10px; border-radius: 15px; overflow: hidden; background: #000; height: 500px;}
+/* GALLERIA SLIDER */
+.img-wrapper { position: relative; margin-bottom: 10px; border-radius: 15px; overflow: hidden; background: #000;}
+
 .img-container {
   width: 100%;
-  height: 100%;
+  height: 500px;
   display: flex;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
 }
+.img-container:active { cursor: grabbing; }
+
 .slide {
   min-width: 100%;
-  height: 100%;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   background: #000;
 }
-.slide img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-.slide img.loaded { opacity: 1; }
 
-/* ROTELLINA CARICAMENTO (LOADER) */
-.loader {
-  position: absolute;
+.slide .loader {
   width: 40px;
   height: 40px;
   border: 4px solid #333;
   border-top: 4px solid #fff;
   border-radius: 50%;
+  position: absolute;
   animation: spin 1s linear infinite;
-  z-index: 5;
+  z-index: 1;
 }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 2;
+}
 
 .fullscreen-icon {
   position: absolute;
@@ -112,14 +141,13 @@ nav button:hover { background:#fff; color:#000; }
 h1 { margin: 20px 0 5px; font-size: 28px; font-weight: 600; }
 .price-tag { font-size: 26px; color:#000; font-weight: 700; margin-bottom: 25px; }
 
-/* GRIGLIA SPECIFICHE */
+.description-section { margin-top: 30px; padding: 20px; background: #fcfcfc; border-radius: 12px; border: 1px solid #eee; }
+.description-section h3 { margin-top: 0; font-size: 18px; font-weight: 600; text-transform: uppercase; margin-bottom: 10px; }
+.description-section p { margin: 0; white-space: pre-line; color: #444; }
+
 .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
 .spec-item { background: #f9f9f9; padding: 12px 15px; border-radius: 10px; border-left: 4px solid #000; }
 .spec-item strong { display: block; font-size: 12px; color: #777; text-transform: uppercase; }
-
-/* DESCRIZIONE */
-.description-section { margin-top: 30px; padding: 20px; background: #fcfcfc; border-radius: 12px; border: 1px solid #eee; }
-.description-section h3 { margin-top: 0; font-size: 18px; font-weight: 600; text-transform: uppercase; margin-bottom: 10px; }
 
 /* BOTTONI AZIONE */
 .action-buttons { display: flex; gap: 15px; margin-top: 40px; }
@@ -129,12 +157,14 @@ h1 { margin: 20px 0 5px; font-size: 28px; font-weight: 600; }
 
 /* MAPPA */
 .map-section { max-width: 900px; width: 95%; margin: 30px auto 60px; background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; }
-.map-section iframe { width: 100%; height: 350px; border-radius: 15px; border: none; margin-top: 15px; }
+.map-section h2 { margin-bottom: 5px; font-weight: 600; }
+.address-text { color: #666; font-size: 15px; margin-bottom: 20px; display: block; font-weight: 400; }
+.map-section iframe { width: 100%; height: 350px; border-radius: 15px; border: none; }
 
 /* FOOTER */
-footer{ background:#000; color:#aaa; text-align:center; padding:40px 20px; font-size:13px; }
+footer{ background:#000; color:#aaa; text-align:center; padding:40px 20px; font-size:13px; margin-top: 40px; }
 
-/* LIGHTBOX */
+/* LIGHTBOX & MODALS */
 #imageLightbox {
   display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95);
   justify-content:center; align-items:center; z-index:2500;
@@ -142,35 +172,38 @@ footer{ background:#000; color:#aaa; text-align:center; padding:40px 20px; font-
 #imageLightbox img { max-width: 90%; max-height: 85%; object-fit: contain; }
 .close-lightbox { position:absolute; top:20px; right:20px; color:white; font-size:40px; cursor:pointer; background:none; border:none; }
 .lightbox-arrow { position:absolute; top:50%; transform:translateY(-50%); background:none; color:white; border:none; font-size:50px; cursor:pointer; padding:20px; }
-#l-prev { left: 20px; } #l-next { right: 20px; }
+#l-prev { left: 20px; }
+#l-next { right: 20px; }
 #lightboxCounter { position:absolute; bottom:30px; color:white; font-size:18px; background:rgba(255,255,255,0.1); padding:5px 15px; border-radius:20px; }
 
 #contactModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; z-index: 3000; }
 .modal-content { background: #fff; padding: 40px; border-radius: 20px; max-width: 400px; width: 90%; text-align: center; }
 .contact-link { display: block; padding: 15px; margin: 10px 0; background: #f4f4f4; border-radius: 10px; text-decoration: none; color: #111; font-weight: 500; }
 
-@media (max-width: 600px) {
-  .img-wrapper, .slide { height: 300px; }
+@media (max-width: 768px) {
+  header img { height: 80px; }
+  .img-container, .slide { height: 300px; }
   .action-buttons { flex-direction: column; }
+  nav button { padding: 6px 12px; font-size: 11px; }
 }
 </style>
 </head>
 <body>
 
 <header>
-    <img src="immagini/logo.png" alt="Logo BENZ&Co">
-    <nav>
-        <button onclick="location.href='index.html'">Home</button>
-        <button onclick="location.href='chi-siamo.html'">Chi siamo</button>
-        <button onclick="location.href='servizi.html'">Servizi</button>
-        <button onclick="location.href='dove.html'">Dove</button>
-        <button onclick="location.href='contatti.html'">Contatti</button>
-    </nav>
+  <img src="immagini/logo.png" alt="Logo BENZ&Co">
+  <nav>
+    <button onclick="location.href='index.html'">Home</button>
+    <button onclick="location.href='chi-siamo.html'">Chi siamo</button>
+    <button onclick="location.href='servizi.html'">Servizi</button>
+    <button onclick="location.href='dove.html'">Dove</button>
+    <button onclick="location.href='contatti.html'">Contatti</button>
+  </nav>
 </header>
 
 <div class="container">
   <div class="img-wrapper">
-    <button class="fullscreen-icon" onclick="openLightbox(current)">⛶</button>
+    <button class="fullscreen-icon" onclick="openLightbox(current)" title="Schermo intero">⛶</button>
     <button class="arrow" id="prev">‹</button>
     <div class="img-container" id="slider"></div>
     <button class="arrow" id="next">›</button>
@@ -178,26 +211,28 @@ footer{ background:#000; color:#aaa; text-align:center; padding:40px 20px; font-
 
   <div class="dots-container" id="dotsContainer"></div>
 
-  <h1>Fiat Doblò 1.4 tjet 16v Natural Power 120cv</h1>
+  <h1>Fiat Doblo 1.4 tjet 16v Natural Power 120cv</h1>
   <div class="price-tag">€ 4.300</div>
 
   <div class="specs-grid">
     <div class="spec-item"><strong>Tipologia</strong> Furgone</div>
-    <div class="spec-item"><strong>Anno immatricolazione</strong> 2016</div>
-    <div class="spec-item"><strong>Km</strong> 252.000</div>
+    <div class="spec-item"><strong>Anno</strong> 2016</div>
+    <div class="spec-item"><strong>Chilometri</strong> 252.000</div>
     <div class="spec-item"><strong>Alimentazione</strong> Metano</div>
     <div class="spec-item"><strong>Cilindrata</strong> 1.368 cm³</div>
     <div class="spec-item"><strong>Cambio</strong> Manuale</div>
     <div class="spec-item"><strong>Colore Esterno</strong> Bianco</div>
     <div class="spec-item"><strong>Colore Interno</strong> Nero</div>
-    <div class="spec-item"><strong>Potenza</strong> 88 kW / 120 CV</div>
     <div class="spec-item"><strong>Proprietari</strong> 1</div>
+    <div class="spec-item"><strong>Potenza</strong> 120 CV (88 kW)</div>
     <div class="spec-item"><strong>Classe emissioni</strong> Euro 6</div>
   </div>
 
   <div class="description-section">
     <h3>Descrizione</h3>
-    <p>Fiat Doblò in versione Natural Power (Metano di fabbrica) con motore 1.4 Turbo da 120cv. Mezzo affidabile e dai bassi costi di gestione. Manutenzione eseguita regolarmente.</p>
+    <p>TEST
+TEST
+TEST</p>
   </div>
 
   <div class="action-buttons">
@@ -208,7 +243,16 @@ footer{ background:#000; color:#aaa; text-align:center; padding:40px 20px; font-
 
 <div class="map-section">
   <h2>Vieni a trovarci</h2>
+  <span class="address-text">Via Francesco Perri, 26, 80044 Ottaviano NA</span>
   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2941785563914!2d14.475171776510307!3d40.854445628859945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb09f984511d7%3A0x6b83f05f778c772e!2sVia%20Francesco%20Perri%2C%2026%2C%2080044%20Ottaviano%20NA!5e0!3m2!1sit!2sit!4v1715612345678!5m2!1sit!2sit" loading="lazy"></iframe>
+</div>
+
+<div id="imageLightbox">
+  <button class="close-lightbox" onclick="closeLightbox()">×</button>
+  <button class="lightbox-arrow" id="l-prev">‹</button>
+  <img src="" id="lightboxImage">
+  <button class="lightbox-arrow" id="l-next">›</button>
+  <div id="lightboxCounter"></div>
 </div>
 
 <div id="contactModal">
@@ -222,51 +266,31 @@ footer{ background:#000; color:#aaa; text-align:center; padding:40px 20px; font-
   </div>
 </div>
 
-<div id="imageLightbox">
-  <button class="close-lightbox" onclick="closeLightbox()">×</button>
-  <button class="lightbox-arrow" id="l-prev">‹</button>
-  <img src="" id="lightboxImage">
-  <button class="lightbox-arrow" id="l-next">›</button>
-  <div id="lightboxCounter"></div>
-</div>
-
 <footer>© 2026 BENZ&Co · Affidabilità, Qualità e Serietà</footer>
 
 <script>
-const images = [
-  'immagini/doblo.jpg', 'immagini/doblo1.jpg', 'immagini/doblo2.jpg', 'immagini/doblo3.jpg',
-  'immagini/doblo4.jpg', 'immagini/doblo5.jpg', 'immagini/doblo6.jpg', 'immagini/doblo7.jpg',
-  'immagini/doblo8.jpg', 'immagini/doblo9.jpg', 'immagini/doblo10.jpg', 'immagini/doblo11.jpg'
-];
+const images = ['immagini/doblo.jpg','immagini/doblo1.jpg','immagini/doblo2.jpg','immagini/doblo3.jpg','immagini/doblo4.jpg','immagini/doblo5.jpg','immagini/doblo6.jpg','immagini/doblo7.jpg','immagini/doblo8.jpg','immagini/doblo9.jpg','immagini/doblo10.jpg','immagini/doblo11.jpg'];
 let current = 0;
 const slider = document.getElementById('slider');
 const dotsContainer = document.getElementById('dotsContainer');
 
-// INIZIALIZZAZIONE SLIDER CON CARICAMENTO FLUIDO
 images.forEach((src, i) => {
   const slide = document.createElement('div');
   slide.className = 'slide';
-  
-  const loader = document.createElement('div');
-  loader.className = 'loader';
-  
-  const img = document.createElement('img');
-  img.src = src;
-  img.draggable = false;
-  img.onload = () => {
-    img.classList.add('loaded');
-    loader.style.display = 'none';
-  };
-  
-  slide.appendChild(loader);
-  slide.appendChild(img);
+  slide.innerHTML = `<div class="loader"></div><img src="${src}" draggable="false" onload="imgLoaded(this)">`;
   slider.appendChild(slide);
-  
+
   const dot = document.createElement('div');
   dot.className = 'dot' + (i === 0 ? ' active' : '');
   dot.onclick = () => goToSlide(i);
   dotsContainer.appendChild(dot);
 });
+
+function imgLoaded(img) {
+  const loader = img.parentElement.querySelector('.loader');
+  if(loader) loader.style.display = 'none';
+  img.style.opacity = '1';
+}
 
 function goToSlide(index) {
   current = index;
@@ -274,8 +298,33 @@ function goToSlide(index) {
   document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
 }
 
-document.getElementById('next').onclick = () => goToSlide((current + 1) % images.length);
-document.getElementById('prev').onclick = () => goToSlide((current - 1 + images.length) % images.length);
+// DRAG & SWIPE LOGIC
+let isDragging = false, startPos = 0, currentTranslate = 0, prevTranslate = 0, animationID = 0;
+
+slider.addEventListener('mousedown', dragStart);
+slider.addEventListener('touchstart', dragStart);
+slider.addEventListener('mouseup', dragEnd);
+slider.addEventListener('mouseleave', dragEnd);
+slider.addEventListener('touchend', dragEnd);
+slider.addEventListener('mousemove', dragMove);
+slider.addEventListener('touchmove', dragMove);
+
+function dragStart(e) { isDragging = true; startPos = getPositionX(e); slider.style.transition = 'none'; animationID = requestAnimationFrame(animation); }
+function dragMove(e) { if (!isDragging) return; const currentPos = getPositionX(e); currentTranslate = prevTranslate + currentPos - startPos; }
+function dragEnd() {
+  isDragging = false; cancelAnimationFrame(animationID);
+  const movedBy = currentTranslate - prevTranslate;
+  if (movedBy < -100 && current < images.length - 1) current++;
+  else if (movedBy > 100 && current > 0) current--;
+  slider.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  goToSlide(current);
+  prevTranslate = -current * slider.clientWidth; currentTranslate = prevTranslate;
+}
+function getPositionX(e) { return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX; }
+function animation() { if (isDragging) { slider.style.transform = `translateX(${currentTranslate}px)`; requestAnimationFrame(animation); } }
+
+document.getElementById('next').onclick = () => { if(current < images.length - 1) goToSlide(current + 1); else goToSlide(0); prevTranslate = -current * slider.clientWidth; currentTranslate = prevTranslate; };
+document.getElementById('prev').onclick = () => { if(current > 0) goToSlide(current - 1); else goToSlide(images.length - 1); prevTranslate = -current * slider.clientWidth; currentTranslate = prevTranslate; };
 
 // LIGHTBOX
 const lightbox = document.getElementById('imageLightbox');
@@ -289,8 +338,9 @@ function closeLightbox() { lightbox.style.display = 'none'; }
 document.getElementById('l-next').onclick = (e) => { e.stopPropagation(); current = (current + 1) % images.length; updateLightbox(); goToSlide(current); };
 document.getElementById('l-prev').onclick = (e) => { e.stopPropagation(); current = (current - 1 + images.length) % images.length; updateLightbox(); goToSlide(current); };
 
-document.getElementById('contactButton').onclick = () => document.getElementById('contactModal').style.display = 'flex';
+// MODAL
 function closeModal(){ document.getElementById('contactModal').style.display = 'none'; }
+document.getElementById('contactButton').onclick = () => document.getElementById('contactModal').style.display = 'flex';
 window.onclick = (e) => { if(e.target === lightbox) closeLightbox(); if(e.target === document.getElementById('contactModal')) closeModal(); }
 </script>
 
