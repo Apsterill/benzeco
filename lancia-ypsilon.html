@@ -11,12 +11,47 @@
 *{ box-sizing:border-box; font-family:'Poppins',sans-serif; }
 body{ margin:0; background:#f5f5f5; color:#111; line-height:1.6; overflow-x: hidden; }
 
-/* HEADER */
-header{ background:#000; color:#fff; padding:10px 20px; text-align:center; position:sticky; top:0; z-index:100; }
-header img{ height:190px; display:block; margin:0 auto 5px; }
-nav{ margin-top:-50px; display:flex; justify-content:center; gap:22px; }
-nav button{ background:transparent; color:#fff; border:1px solid #fff; padding:10px 22px; border-radius:30px; cursor:pointer; transition:.3s; }
-nav button:hover{ background:#fff; color:#000; }
+/* HEADER REDESIGN (Uniformato) */
+header { 
+    background: rgba(0,0,0,0.95); 
+    backdrop-filter: blur(5px);
+    color:#fff; 
+    padding: 15px 20px; 
+    text-align:center; 
+    position:sticky; 
+    top:0; 
+    z-index:100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+header img { 
+    height: 100px; 
+    display:block; 
+    margin:0 auto 10px; 
+    transition: 0.3s;
+}
+
+nav { 
+    display:flex; 
+    justify-content:center; 
+    gap:10px; 
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+nav button { 
+    background:rgba(255,255,255,0.1); 
+    color:#fff; 
+    border:1px solid rgba(255,255,255,0.3); 
+    padding:8px 16px; 
+    border-radius:20px; 
+    cursor:pointer; 
+    font-size: 13px;
+    font-weight: 500;
+    transition:.3s; 
+}
+
+nav button:hover { background:#fff; color:#000; border-color: #fff; }
 
 /* CONTAINER PRINCIPALE */
 .container{ max-width:900px; margin:50px auto; background:#fff; padding:40px; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,.1); position:relative; }
@@ -126,7 +161,10 @@ h1 { margin: 20px 0 5px; font-size: 28px; font-weight: 600; }
 .address-text { color: #666; font-size: 15px; margin-bottom: 20px; display: block; font-weight: 400; }
 .map-section iframe { width: 100%; height: 350px; border-radius: 15px; border: none; }
 
-/* LIGHTBOX */
+/* FOOTER */
+footer{ background:#000; color:#aaa; text-align:center; padding:40px 20px; font-size:13px; margin-top: 40px; }
+
+/* LIGHTBOX & MODALS */
 #imageLightbox {
   display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95);
   justify-content:center; align-items:center; z-index:2500;
@@ -138,26 +176,27 @@ h1 { margin: 20px 0 5px; font-size: 28px; font-weight: 600; }
 #l-next { right: 20px; }
 #lightboxCounter { position:absolute; bottom:30px; color:white; font-size:18px; background:rgba(255,255,255,0.1); padding:5px 15px; border-radius:20px; }
 
-/* MODALE CONTATTI */
 #contactModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; z-index: 3000; }
 .modal-content { background: #fff; padding: 40px; border-radius: 20px; max-width: 400px; width: 90%; text-align: center; }
 .contact-link { display: block; padding: 15px; margin: 10px 0; background: #f4f4f4; border-radius: 10px; text-decoration: none; color: #111; font-weight: 500; }
 
-footer{ background:#000; color:#aaa; text-align:center; padding:22px; font-size:13px; }
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  header img { height: 80px; }
   .img-container, .slide { height: 300px; }
   .action-buttons { flex-direction: column; }
+  nav button { padding: 6px 12px; font-size: 11px; }
 }
 </style>
 </head>
 <body>
 
 <header>
-  <img src="immagini/logo.jpeg" alt="Logo BENZ&Co">
+  <img src="immagini/logo.png" alt="Logo BENZ&Co">
   <nav>
     <button onclick="location.href='index.html'">Home</button>
     <button onclick="location.href='chi-siamo.html'">Chi siamo</button>
+    <button onclick="location.href='servizi.html'">Servizi</button>
+    <button onclick="location.href='dove.html'">Dove</button>
     <button onclick="location.href='contatti.html'">Contatti</button>
   </nav>
 </header>
@@ -180,7 +219,11 @@ footer{ background:#000; color:#aaa; text-align:center; padding:22px; font-size:
     <div class="spec-item"><strong>Anno</strong> 2017</div>
     <div class="spec-item"><strong>Chilometri</strong> 139.000</div>
     <div class="spec-item"><strong>Alimentazione</strong> Metano</div>
+    <div class="spec-item"><strong>Cilindrata</strong> 875 cm³</div>
     <div class="spec-item"><strong>Cambio</strong> Manuale</div>
+    <div class="spec-item"><strong>Colore Esterno</strong> Blu</div>
+    <div class="spec-item"><strong>Colore Interno</strong> Nero</div>
+    <div class="spec-item"><strong>Peso a vuoto</strong> 1090 kg</div>
     <div class="spec-item"><strong>Proprietari</strong> 1</div>
     <div class="spec-item"><strong>Potenza</strong> 80 CV (59 kW)</div>
     <div class="spec-item"><strong>Classe emissioni</strong> Euro 6</div>
@@ -223,12 +266,7 @@ Garanzia legale di conformità 12 mesi (estendibile su richiesta).
 Benz&Co
 📍 Via Francesco Perri 26, Ottaviano (NA)
 📞 +39 331 334 4567
-📧 benz3co@gmail.com
-🕒 Lunedì–Venerdì 9:00–13:00 / 16:00–20:00
- Sabato su appuntamento
-
-⚠️ Nota Bene
-La società venditrice non assume alcuna responsabilità relativamente ai dati della vettura riportati nel sito, avuto particolare riguardo agli optional che debbono considerarsi puramente indicativi essendo il sito in continuo aggiornamento. Invitiamo i nostri clienti a prendere contatto telefonico per la verifica delle caratteristiche della vettura.</p>
+📧 benz3co@gmail.com</p>
   </div>
 
   <div class="action-buttons">
@@ -240,7 +278,7 @@ La società venditrice non assume alcuna responsabilità relativamente ai dati d
 <div class="map-section">
   <h2>Vieni a trovarci</h2>
   <span class="address-text">Via Francesco Perri, 26, 80044 Ottaviano NA</span>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2941785563914!2d14.475171776510307!3d40.854445628859945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb09f984511d7%3A0x6b83f05f778c772e!2sVia%20Francesco%20Perri%2C%2026%2C%2080044%20Ottaviano%20NA!5e0!3m2!1sit!2sit!4v1715612345678!5m2!1sit!2sit"" loading="lazy"></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2941785563914!2d14.475171776510307!3d40.854445628859945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb09f984511d7%3A0x6b83f05f778c772e!2sVia%20Francesco%20Perri%2C%2026%2C%2080044%20Ottaviano%20NA!5e0!3m2!1sit!2sit!4v1715612345678!5m2!1sit!2sit" loading="lazy"></iframe>
 </div>
 
 <div id="imageLightbox">
