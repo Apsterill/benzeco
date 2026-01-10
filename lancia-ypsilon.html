@@ -21,7 +21,7 @@ nav button:hover{ background:#fff; color:#000; }
 /* CONTAINER PRINCIPALE */
 .container{ max-width:900px; margin:50px auto; background:#fff; padding:40px; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,.1); position:relative; }
 
-/* GALLERIA SLIDER AGGIORNATA */
+/* GALLERIA SLIDER */
 .img-wrapper { position: relative; margin-bottom: 10px; border-radius: 15px; overflow: hidden; background: #000;}
 
 .img-container {
@@ -42,16 +42,31 @@ nav button:hover{ background:#fff; color:#000; }
   align-items: center;
   justify-content: center;
   position: relative;
+  background: #000;
 }
+
+.slide .loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #333;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 .slide img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  pointer-events: none; /* Impedisce il trascinamento predefinito dell'immagine */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 2;
 }
 
-/* Icona Fullscreen */
 .fullscreen-icon {
   position: absolute;
   top: 15px;
@@ -99,11 +114,17 @@ h1 { margin: 20px 0 5px; font-size: 28px; font-weight: 600; }
 .spec-item { background: #f9f9f9; padding: 12px 15px; border-radius: 10px; border-left: 4px solid #000; }
 .spec-item strong { display: block; font-size: 12px; color: #777; text-transform: uppercase; }
 
-/* BOTTONI */
+/* BOTTONI AZIONE */
 .action-buttons { display: flex; gap: 15px; margin-top: 40px; }
 .btn { flex: 1; padding: 18px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.3s; text-decoration: none; border: none; font-size: 16px; }
 .btn-home { background: #eee; color: #111; font-weight: 500; }
 .btn-contact { background: #000; color: #fff; font-weight: 800; text-transform: uppercase; }
+
+/* MAPPA E INDIRIZZO */
+.map-section { max-width: 900px; width: 95%; margin: 30px auto 60px; background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; }
+.map-section h2 { margin-bottom: 5px; font-weight: 600; }
+.address-text { color: #666; font-size: 15px; margin-bottom: 20px; display: block; font-weight: 400; }
+.map-section iframe { width: 100%; height: 350px; border-radius: 15px; border: none; }
 
 /* LIGHTBOX */
 #imageLightbox {
@@ -121,9 +142,6 @@ h1 { margin: 20px 0 5px; font-size: 28px; font-weight: 600; }
 #contactModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; z-index: 3000; }
 .modal-content { background: #fff; padding: 40px; border-radius: 20px; max-width: 400px; width: 90%; text-align: center; }
 .contact-link { display: block; padding: 15px; margin: 10px 0; background: #f4f4f4; border-radius: 10px; text-decoration: none; color: #111; font-weight: 500; }
-
-.map-section { max-width: 900px; width: 95%; margin: 30px auto 60px; background: #fff; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; }
-.map-section iframe { width: 100%; height: 350px; border-radius: 15px; border: none; }
 
 footer{ background:#000; color:#aaa; text-align:center; padding:22px; font-size:13px; }
 
@@ -148,10 +166,7 @@ footer{ background:#000; color:#aaa; text-align:center; padding:22px; font-size:
   <div class="img-wrapper">
     <button class="fullscreen-icon" onclick="openLightbox(current)" title="Schermo intero">⛶</button>
     <button class="arrow" id="prev">‹</button>
-    
-    <div class="img-container" id="slider">
-        </div>
-    
+    <div class="img-container" id="slider"></div>
     <button class="arrow" id="next">›</button>
   </div>
 
@@ -205,16 +220,12 @@ Auto unico proprietario, sempre tagliandata e pronta alla consegna immediata.
 🛡️ Garanzia
 Garanzia legale di conformità 12 mesi (estendibile su richiesta).
 
-
-
 Benz&Co
 📍 Via Francesco Perri 26, Ottaviano (NA)
 📞 +39 331 334 4567
 📧 benz3co@gmail.com
 🕒 Lunedì–Venerdì 9:00–13:00 / 16:00–20:00
  Sabato su appuntamento
-
-
 
 ⚠️ Nota Bene
 La società venditrice non assume alcuna responsabilità relativamente ai dati della vettura riportati nel sito, avuto particolare riguardo agli optional che debbono considerarsi puramente indicativi essendo il sito in continuo aggiornamento. Invitiamo i nostri clienti a prendere contatto telefonico per la verifica delle caratteristiche della vettura.</p>
@@ -226,17 +237,18 @@ La società venditrice non assume alcuna responsabilità relativamente ai dati d
   </div>
 </div>
 
+<div class="map-section">
+  <h2>Vieni a trovarci</h2>
+  <span class="address-text">Via Francesco Perri, 26, 80044 Ottaviano NA</span>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2941785563914!2d14.475171776510307!3d40.854445628859945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb09f984511d7%3A0x6b83f05f778c772e!2sVia%20Francesco%20Perri%2C%2026%2C%2080044%20Ottaviano%20NA!5e0!3m2!1sit!2sit!4v1715612345678!5m2!1sit!2sit"" loading="lazy"></iframe>
+</div>
+
 <div id="imageLightbox">
   <button class="close-lightbox" onclick="closeLightbox()">×</button>
   <button class="lightbox-arrow" id="l-prev">‹</button>
   <img src="" id="lightboxImage">
   <button class="lightbox-arrow" id="l-next">›</button>
   <div id="lightboxCounter"></div>
-</div>
-
-<div class="map-section">
-  <h2>Vieni a trovarci</h2>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2941785563914!2d14.475171776510307!3d40.854445628859945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb09f984511d7%3A0x6b83f05f778c772e!2sVia%20Francesco%20Perri%2C%2026%2C%2080044%20Ottaviano%20NA!5e0!3m2!1sit!2sit!4v1715612345678!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
 </div>
 
 <div id="contactModal">
@@ -250,7 +262,7 @@ La società venditrice non assume alcuna responsabilità relativamente ai dati d
   </div>
 </div>
 
-<footer>© 2025 BENZ&Co · Affidabilità, Qualità e Serietà</footer>
+<footer>© 2026 BENZ&Co · Affidabilità, Qualità e Serietà</footer>
 
 <script>
 const images = ['immagini/ypsilon.png','immagini/ypsilon2.png','immagini/ypsilon4.png','immagini/ypsilon5.png','immagini/ypsilon6.png','immagini/ypsilon7.png','immagini/ypsilon8.png','immagini/ypsilon9.png','immagini/ypsilon10.png','immagini/ypsilon11.png','immagini/ypsilon12.png'];
@@ -258,11 +270,10 @@ let current = 0;
 const slider = document.getElementById('slider');
 const dotsContainer = document.getElementById('dotsContainer');
 
-// Carica immagini nello slider
 images.forEach((src, i) => {
   const slide = document.createElement('div');
   slide.className = 'slide';
-  slide.innerHTML = `<img src="${src}" draggable="false">`;
+  slide.innerHTML = `<div class="loader"></div><img src="${src}" draggable="false" onload="imgLoaded(this)">`;
   slider.appendChild(slide);
 
   const dot = document.createElement('div');
@@ -271,18 +282,19 @@ images.forEach((src, i) => {
   dotsContainer.appendChild(dot);
 });
 
+function imgLoaded(img) {
+  const loader = img.parentElement.querySelector('.loader');
+  if(loader) loader.style.display = 'none';
+  img.style.opacity = '1';
+}
+
 function goToSlide(index) {
   current = index;
   slider.style.transform = `translateX(-${current * 100}%)`;
   document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
 }
 
-// LOGICA DRAG & SWIPE
-let isDragging = false;
-let startPos = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let animationID = 0;
+let isDragging = false, startPos = 0, currentTranslate = 0, prevTranslate = 0, animationID = 0;
 
 slider.addEventListener('mousedown', dragStart);
 slider.addEventListener('touchstart', dragStart);
@@ -292,45 +304,20 @@ slider.addEventListener('touchend', dragEnd);
 slider.addEventListener('mousemove', dragMove);
 slider.addEventListener('touchmove', dragMove);
 
-function dragStart(e) {
-  isDragging = true;
-  startPos = getPositionX(e);
-  slider.style.transition = 'none';
-  animationID = requestAnimationFrame(animation);
-}
-
-function dragMove(e) {
-  if (!isDragging) return;
-  const currentPosition = getPositionX(e);
-  currentTranslate = prevTranslate + currentPosition - startPos;
-}
-
+function dragStart(e) { isDragging = true; startPos = getPositionX(e); slider.style.transition = 'none'; animationID = requestAnimationFrame(animation); }
+function dragMove(e) { if (!isDragging) return; const currentPos = getPositionX(e); currentTranslate = prevTranslate + currentPos - startPos; }
 function dragEnd() {
-  isDragging = false;
-  cancelAnimationFrame(animationID);
+  isDragging = false; cancelAnimationFrame(animationID);
   const movedBy = currentTranslate - prevTranslate;
-
   if (movedBy < -100 && current < images.length - 1) current++;
   else if (movedBy > 100 && current > 0) current--;
-
   slider.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
   goToSlide(current);
-  prevTranslate = -current * slider.clientWidth;
-  currentTranslate = prevTranslate;
+  prevTranslate = -current * slider.clientWidth; currentTranslate = prevTranslate;
 }
+function getPositionX(e) { return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX; }
+function animation() { if (isDragging) { slider.style.transform = `translateX(${currentTranslate}px)`; requestAnimationFrame(animation); } }
 
-function getPositionX(e) {
-  return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-}
-
-function animation() {
-  if (isDragging) {
-    slider.style.transform = `translateX(${currentTranslate}px)`;
-    requestAnimationFrame(animation);
-  }
-}
-
-// Frecce e Lightbox (rimangono simili)
 document.getElementById('next').onclick = () => { if(current < images.length - 1) goToSlide(current + 1); else goToSlide(0); prevTranslate = -current * slider.clientWidth; currentTranslate = prevTranslate; };
 document.getElementById('prev').onclick = () => { if(current > 0) goToSlide(current - 1); else goToSlide(images.length - 1); prevTranslate = -current * slider.clientWidth; currentTranslate = prevTranslate; };
 
@@ -338,15 +325,8 @@ const lightbox = document.getElementById('imageLightbox');
 const lightboxImg = document.getElementById('lightboxImage');
 const lightboxCounter = document.getElementById('lightboxCounter');
 
-function openLightbox(index) {
-  current = index;
-  updateLightbox();
-  lightbox.style.display = 'flex';
-}
-function updateLightbox() {
-  lightboxImg.src = images[current];
-  lightboxCounter.textContent = `${current + 1} / ${images.length}`;
-}
+function openLightbox(index) { current = index; updateLightbox(); lightbox.style.display = 'flex'; }
+function updateLightbox() { lightboxImg.src = images[current]; lightboxCounter.textContent = `${current + 1} / ${images.length}`; }
 function closeLightbox() { lightbox.style.display = 'none'; }
 
 document.getElementById('l-next').onclick = (e) => { e.stopPropagation(); current = (current + 1) % images.length; updateLightbox(); goToSlide(current); };
@@ -356,5 +336,6 @@ function closeModal(){ document.getElementById('contactModal').style.display = '
 document.getElementById('contactButton').onclick = () => document.getElementById('contactModal').style.display = 'flex';
 window.onclick = (e) => { if(e.target === lightbox) closeLightbox(); if(e.target === document.getElementById('contactModal')) closeModal(); }
 </script>
+
 </body>
 </html>
