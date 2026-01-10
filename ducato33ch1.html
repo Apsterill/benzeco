@@ -5,372 +5,269 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fiat Ducato 33 CH1 - BENZ&Co</title>
 <link rel="icon" type="image/jpeg" href="immagini/logo2.png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:#f4f4f4;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding-top:40px;
-  color:#111;
+*{ box-sizing:border-box; font-family:'Poppins',sans-serif; }
+body{ margin:0; background:#f5f5f5; color:#111; line-height:1.6; overflow-x: hidden; }
+
+/* HEADER */
+header { 
+    background: rgba(0,0,0,0.95); 
+    backdrop-filter: blur(5px);
+    color:#fff; 
+    padding: 15px 20px; 
+    text-align:center; 
+    position:sticky; 
+    top:0; 
+    z-index:100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
-.container{
-  background:#fff;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 12px 30px rgba(0,0,0,.1);
-  max-width:600px;
-  width:90%;
-  text-align:center;
-  position:relative;
-  margin-bottom:40px;
+header img { 
+    height: 100px; 
+    display:block; 
+    margin:0 auto 10px; 
+    transition: 0.3s;
 }
 
-h1{
-  color:#111;
-  margin-bottom:10px;
-  font-weight:500;
+nav { 
+    display:flex; 
+    justify-content:center; 
+    gap:10px; 
+    margin-top: 5px;
+    flex-wrap: wrap;
 }
 
-#backButton{
-  display:inline-block;
-  margin-bottom:15px;
-  padding:10px 20px;
-  font-size:16px;
-  font-weight:500;
-  color:#fff;
-  background:#111;
-  border:none;
-  border-radius:14px;
-  cursor:pointer;
-  text-decoration:none;
-  transition:0.3s;
-}
-#backButton:hover{ background:#333; }
-
-#contactButton{
-  padding:14px 28px;
-  font-size:18px;
-  font-weight:600;
-  font-family:'Poppins', sans-serif;
-  color:#fff;
-  background:#28a745;
-  border:none;
-  border-radius:16px;
-  cursor:pointer;
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
-  transition:0.3s;
-}
-#contactButton:hover{
-  background:#1e7e34;
-  transform:scale(1.05);
+nav button { 
+    background:rgba(255,255,255,0.1); 
+    color:#fff; 
+    border:1px solid rgba(255,255,255,0.3); 
+    padding:8px 16px; 
+    border-radius:20px; 
+    cursor:pointer; 
+    font-size: 13px;
+    font-weight: 500;
+    transition:.3s; 
 }
 
-/* MODIFICA: Immagine con bande nere */
-img#mainImage{
-  width:100%;
-  height:360px;
-  object-fit: contain; /* Mantiene le proporzioni senza tagliare */
-  background-color: #000; /* Crea le bande nere */
-  border-radius:16px;
-  border:1px solid #ccc;
-  box-shadow:0 4px 15px rgba(0,0,0,.08);
-  cursor:pointer;
-  display:block;
-  margin-bottom:8px;
-}
+nav button:hover { background:#fff; color:#000; border-color: #fff; }
 
-#fullscreenBtn{
-  display:inline-block;
-  margin-bottom:10px;
-  font-size:14px;
-  font-weight:500;
-  color:#fff;
-  background:linear-gradient(145deg, #333, #444);
-  padding:12px 24px;
-  border-radius:16px;
-  border:none;
-  cursor:pointer;
-  transition:0.3s;
-  box-shadow:0 4px 15px rgba(0,0,0,.2);
-  animation:blinkText 5.5s infinite;
-}
-#fullscreenBtn:hover{
-  background:linear-gradient(145deg, #444, #555);
-  transform:scale(1.05);
-}
+/* CONTAINER PRINCIPALE */
+.container{ max-width:900px; margin:50px auto; background:#fff; padding:40px; border-radius:20px; box-shadow:0 20px 50px rgba(0,0,0,.1); position:relative; }
 
-@keyframes blinkText {
-  0%, 50%, 100% { opacity:1; }
-  25%, 75% { opacity:0.6; }
-}
+/* GALLERIA SLIDER AVANZATA */
+.img-wrapper { position: relative; margin-bottom: 10px; border-radius: 15px; overflow: hidden; background: #000;}
 
-.dots-container {
+.img-container {
+  width: 100%;
+  height: 500px;
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 15px 0;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
 }
-.dot {
-  width: 10px;
-  height: 10px;
-  background-color: #ddd;
+.img-container:active { cursor: grabbing; }
+
+.slide {
+  min-width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #000;
+}
+
+.slide .loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #333;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 2;
+}
+
+.fullscreen-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 15;
+  font-size: 20px;
+  border: none;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   cursor: pointer;
-  transition: 0.3s;
+  z-index: 10;
+  font-size: 24px;
 }
-.dot.active {
-  background-color: #111;
-  transform: scale(1.3);
-}
+#prev { left: 15px; }
+#next { right: 15px; }
 
-button.arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,0.6);
-  color:#fff;
-  border:none;
-  font-size:26px;
-  padding:12px 16px;
-  cursor:pointer;
-  border-radius:50%;
-  box-shadow:0 3px 10px rgba(0,0,0,.3);
-  transition:0.25s;
-}
-button.arrow:hover{ background:rgba(0,0,0,0.8); }
-#prev{left:-15px;} #next{right:-15px;}
+.dots-container { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+.dot { width: 10px; height: 10px; background: #ccc; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+.dot.active { background: #000; transform: scale(1.2); }
 
-ul#specList{
-  margin-top:20px;
-  text-align:left;
-  padding-left:0;
-  list-style:none;
-}
-ul#specList li{
-  padding:6px 0;
-  border-bottom:1px solid #e0e0e0;
-  font-weight:400;
-}
-ul#specList li strong{ color:#111; }
+/* TESTI */
+h1 { margin: 20px 0 5px; font-size: 28px; font-weight: 600; }
+.price-tag { font-size: 26px; color:#000; font-weight: 700; margin-bottom: 25px; }
 
-.price-contact-wrapper{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-  margin-top:20px;
-  flex-wrap:wrap;
-}
+.description-section { margin-top: 30px; padding: 20px; background: #fcfcfc; border-radius: 12px; border: 1px solid #eee; }
+.description-section h3 { margin-top: 0; font-size: 18px; font-weight: 600; text-transform: uppercase; margin-bottom: 10px; }
+.description-section p { margin: 0; white-space: pre-line; color: #444; }
 
-.price-box{
-  font-size:22px;
-  font-weight:700;
-  color:#111;
-  border:2px solid #111;
-  padding:14px 22px;
-  border-radius:14px;
-}
+.specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+.spec-item { background: #f9f9f9; padding: 12px 15px; border-radius: 10px; border-left: 4px solid #000; }
+.spec-item strong { display: block; font-size: 12px; color: #777; text-transform: uppercase; }
 
-#contactModal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.7);
-  justify-content:center;
-  align-items:center;
-  z-index:1000;
-}
-#contactModal.show{ display:flex; }
-#contactModal .modal-content{
-  background:#fff;
-  padding:30px 20px;
-  border-radius:18px;
-  text-align:center;
-  max-width:350px;
-  width:90%;
-  box-shadow:0 8px 25px rgba(0,0,0,.2);
-  transform:scale(0.8);
-  opacity:0;
-  animation:scaleUp 0.25s forwards;
-}
-#contactModal .modal-content h2{ margin-bottom:15px; font-size:22px; color:#111; }
-#contactModal .modal-content p{ font-size:18px; margin-bottom:12px; user-select:text; }
-#contactModal .modal-content a{ color:#111; text-decoration:none; }
-#contactModal .modal-content a:hover{ text-decoration:underline; }
-#contactModal .modal-content button{
-  padding:10px 20px;
-  font-size:16px;
-  background:#111;
-  color:#fff;
-  border:none;
-  border-radius:14px;
-  cursor:pointer;
-  transition:0.25s;
-}
-#contactModal .modal-content button:hover{ background:#333; }
+/* BOTTONI AZIONE */
+.action-buttons { display: flex; gap: 15px; margin-top: 40px; }
+.btn { flex: 1; padding: 18px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.3s; text-decoration: none; border: none; font-size: 16px; }
+.btn-home { background: #eee; color: #111; font-weight: 500; }
+.btn-contact { background: #000; color: #fff; font-weight: 800; text-transform: uppercase; }
 
-@keyframes scaleUp{
-  from{opacity:0; transform:scale(0.8);}
-  to{opacity:1; transform:scale(1);}
-}
+/* MAPPA */
+.map-section { max-width: 900px; width: 95%; margin: 30px auto 60px; background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; }
+.map-section h2 { margin-bottom: 5px; font-weight: 600; }
+.address-text { color: #666; font-size: 15px; margin-bottom: 20px; display: block; font-weight: 400; }
+.map-section iframe { width: 100%; height: 350px; border-radius: 15px; border: none; }
 
-/* MODIFICA: Lightbox con gestione corretta risoluzione */
-#imageLightbox{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.95);
-  justify-content:center;
-  align-items:center;
-  z-index:1500;
-}
-#imageLightbox.show{ display:flex; }
-#imageLightbox img{ 
-  max-width:90%; 
-  max-height:90%; 
-  object-fit: contain; /* Evita deformazioni */
-  border-radius:16px; 
-  box-shadow:0 8px 30px rgba(0,0,0,.5); 
-}
-#imageLightbox button.closeLightbox{
-  position:absolute;
-  top:20px;
-  right:20px;
-  background:rgba(0,0,0,0.6);
-  color:#fff;
-  border:none;
-  font-size:28px;
-  padding:8px 14px;
-  border-radius:50%;
-  cursor:pointer;
-  transition:0.25s;
-}
-#imageLightbox button.lightboxArrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,0.6);
-  color:#fff;
-  border:none;
-  font-size:28px;
-  padding:12px 16px;
-  border-radius:50%;
-  cursor:pointer;
-  transition:0.25s;
-}
-#imagePrev{ left:30px; } #imageNext{ right:30px; }
+/* FOOTER */
+footer{ background:#000; color:#aaa; text-align:center; padding:40px 20px; font-size:13px; margin-top: 40px; }
 
-#imageCounterLightbox{
-  position:absolute;
-  bottom:20px;
-  font-size:16px;
-  color:#fff;
-  background:rgba(0,0,0,0.5);
-  padding:6px 12px;
-  border-radius:12px;
+/* LIGHTBOX & MODALS */
+#imageLightbox {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95);
+  justify-content:center; align-items:center; z-index:2500;
 }
+#imageLightbox img { max-width: 90%; max-height: 85%; object-fit: contain; }
+.close-lightbox { position:absolute; top:20px; right:20px; color:white; font-size:40px; cursor:pointer; background:none; border:none; }
+.lightbox-arrow { position:absolute; top:50%; transform:translateY(-50%); background:none; color:white; border:none; font-size:50px; cursor:pointer; padding:20px; }
+#l-prev { left: 20px; }
+#l-next { right: 20px; }
+#lightboxCounter { position:absolute; bottom:30px; color:white; font-size:18px; background:rgba(255,255,255,0.1); padding:5px 15px; border-radius:20px; }
 
-.map-section{
-  max-width:600px;
-  width:90%;
-  margin-bottom:20px;
-  text-align:center;
-  background:#fff;
-  padding:20px;
-  border-radius:20px;
-  box-shadow:0 12px 25px rgba(0,0,0,.08);
+#contactModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; z-index: 3000; }
+.modal-content { background: #fff; padding: 40px; border-radius: 20px; max-width: 400px; width: 90%; text-align: center; }
+.contact-link { display: block; padding: 15px; margin: 10px 0; background: #f4f4f4; border-radius: 10px; text-decoration: none; color: #111; font-weight: 500; }
+
+@media (max-width: 768px) {
+  header img { height: 80px; }
+  .img-container, .slide { height: 300px; }
+  .action-buttons { flex-direction: column; }
+  nav button { padding: 6px 12px; font-size: 11px; }
 }
-.map-section h2{ margin-bottom:15px; font-weight:500; color:#111; }
-.map-section iframe{ width:100%; height:250px; border:0; border-radius:14px; }
-#bottomBackButton{
-  display:inline-block;
-  margin-top:10px;
-  padding:10px 20px;
-  font-size:16px;
-  font-weight:500;
-  color:#fff;
-  background:#111;
-  border:none;
-  border-radius:14px;
-  cursor:pointer;
-  text-decoration:none;
-  transition:0.25s;
-}
-#bottomBackButton:hover{ background:#333; }
 </style>
 </head>
 <body>
 
+<header>
+  <img src="immagini/logo.png" alt="Logo BENZ&Co">
+  <nav>
+    <button onclick="location.href='index.html'">Home</button>
+    <button onclick="location.href='chi-siamo.html'">Chi siamo</button>
+    <button onclick="location.href='servizi.html'">Servizi</button>
+    <button onclick="location.href='dove.html'">Dove</button>
+    <button onclick="location.href='contatti.html'">Contatti</button>
+  </nav>
+</header>
+
 <div class="container">
-<a href="index.html" id="backButton">< Torna alla Home</a>
-<h1>Fiat Ducato 33 CH1 2.3 Multijet 120CV E6D-temp</h1>
+  <div class="img-wrapper">
+    <button class="fullscreen-icon" onclick="openLightbox(current)" title="Schermo intero">⛶</button>
+    <button class="arrow" id="prev">‹</button>
+    <div class="img-container" id="slider"></div>
+    <button class="arrow" id="next">›</button>
+  </div>
 
-<div style="position:relative;">
-  <button class="arrow" id="prev">‹</button>
-  <img id="mainImage" src="immagini/ducato33ch1.png">
-  <button class="arrow" id="next">›</button>
+  <div class="dots-container" id="dotsContainer"></div>
+
+  <h1>Fiat Ducato 33 CH1 2.3 Multijet 120CV</h1>
+  <div class="price-tag">€ 10.499</div>
+
+  <div class="specs-grid">
+    <div class="spec-item"><strong>Tipologia</strong> Furgone</div>
+    <div class="spec-item"><strong>Anno</strong> 2021</div>
+    <div class="spec-item"><strong>Chilometri</strong> 159.000</div>
+    <div class="spec-item"><strong>Alimentazione</strong> Diesel</div>
+    <div class="spec-item"><strong>Cilindrata</strong> 2.287 cm³</div>
+    <div class="spec-item"><strong>Cambio</strong> Manuale</div>
+    <div class="spec-item"><strong>Colore Esterno</strong> Bianco</div>
+    <div class="spec-item"><strong>Colore Interno</strong> Nero</div>
+    <div class="spec-item"><strong>Peso a vuoto</strong> 1.984 kg</div>
+    <div class="spec-item"><strong>Proprietari</strong> 1</div>
+    <div class="spec-item"><strong>Potenza</strong> 120 CV (88 kW)</div>
+    <div class="spec-item"><strong>Classe emissioni</strong> Euro 6d-TEMP</div>
+  </div>
+
+  <div class="description-section">
+    <h3>Descrizione</h3>
+    <p>TEST
+TEST
+TEST</p>
+  </div>
+
+  <div class="action-buttons">
+    <a href="index.html" class="btn btn-home">< Torna alla lista</a>
+    <button class="btn btn-contact" id="contactButton">Richiedi Informazioni</button>
+  </div>
 </div>
 
-<div class="dots-container" id="dotsContainer"></div>
-
-<button id="fullscreenBtn" onclick="openLightbox(current)">
-  Visualizza a schermo intero
-</button>
-
-<ul id="specList">
-  <li><strong>Tipologia:</strong> Furgone</li>
-  <li><strong>Anno immatricolazione:</strong> 2021</li>
-  <li><strong>Km:</strong> 159.000</li>
-  <li><strong>Alimentazione:</strong> Diesel</li>
-  <li><strong>Cambio:</strong> Manuale</li>
-  <li><strong>Colore esterno:</strong> Bianco</li>
-  <li><strong>Colore interno:</strong> Nero</li>
-  <li><strong>Potenza:</strong> 88 kW / 120 CV</li>
-  <li><strong>Cilindrata:</strong> 2.287</li>
-  <li><strong>Peso a vuoto:</strong> 1.984 kg</li>
-  <li><strong>Numero proprietari precedenti:</strong> 3</li>
-  <li><strong>Classe emissioni:</strong> Euro 6d-TEMP</li>
-</ul>
-
-<div class="price-contact-wrapper">
-  <div class="price-box">Prezzo: € 10.499</div>
-  <button id="contactButton">CONTATTACI</button>
+<div class="map-section">
+  <h2>Vieni a trovarci</h2>
+  <span class="address-text">Via Francesco Perri, 26, 80044 Ottaviano NA</span>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2941785563914!2d14.475171776510307!3d40.854445628859945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb09f984511d7%3A0x6b83f05f778c772e!2sVia%20Francesco%20Perri%2C%2026%2C%2080044%20Ottaviano%20NA!5e0!3m2!1sit!2sit!4v1715612345678!5m2!1sit!2sit" loading="lazy"></iframe>
 </div>
 
+<div id="imageLightbox">
+  <button class="close-lightbox" onclick="closeLightbox()">×</button>
+  <button class="lightbox-arrow" id="l-prev">‹</button>
+  <img src="" id="lightboxImage">
+  <button class="lightbox-arrow" id="l-next">›</button>
+  <div id="lightboxCounter"></div>
 </div>
 
 <div id="contactModal">
   <div class="modal-content">
-    <h2>Contatti</h2>
-    <p>📞 <a href="tel:+393313344567">+39 331 334 4567</a></p>
-    <p>✉️ <a href="mailto:benz3co@gmail.com">benz3co@gmail.com</a></p>
-    <button onclick="closeModal()">Chiudi</button>
+    <h2>Benz&Co</h2>
+    <p>Siamo a tua completa disposizione.</p>
+    <a href="tel:+393313344567" class="contact-link">📞 Chiama: +39 331 334 4567</a>
+    <a href="https://wa.me/393313344567" class="contact-link" style="color: #25D366; font-weight: 700;">💬 WhatsApp</a>
+    <a href="mailto:benz3co@gmail.com" class="contact-link">✉️ Email: benz3co@gmail.com</a>
+    <button onclick="closeModal()" style="margin-top:20px; background:none; border:none; text-decoration:underline; cursor:pointer;">Chiudi</button>
   </div>
 </div>
 
-<div id="imageLightbox">
-  <img src="" id="lightboxImage">
-  <button class="closeLightbox" onclick="closeLightbox()">×</button>
-  <button class="lightboxArrow" id="imagePrev">‹</button>
-  <button class="lightboxArrow" id="imageNext">›</button>
-  <div id="imageCounterLightbox">1 / 5</div>
-</div>
-
-<div class="map-section">
-<h2>Dove si trova?</h2>
-<iframe 
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.2941785563914!2d14.475171776510307!3d40.854445628859945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bb09f984511d7%3A0x6b83f05f778c772e!2sVia%20Francesco%20Perri%2C%2026%2C%2080044%20Ottaviano%20NA!5e0!3m2!1sit!2sit!4v1715612345678!5m2!1sit!2sit"
-  allowfullscreen=""
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade">
-</iframe>
-<a href="index.html" id="bottomBackButton">< Torna alla Home</a>
-</div>
+<footer>© 2026 BENZ&Co · Affidabilità, Qualità e Serietà</footer>
 
 <script>
 const images = [
@@ -378,64 +275,83 @@ const images = [
   'immagini/ducato33ch12.png',
   'immagini/ducato33ch13.png',
   'immagini/ducato33ch14.png',
-  'immagini/ducato33ch15.png',
+  'immagini/ducato33ch15.png'
 ];
 
 let current = 0;
-const mainImage = document.getElementById('mainImage');
+const slider = document.getElementById('slider');
 const dotsContainer = document.getElementById('dotsContainer');
 
-images.forEach((_, i) => {
+// Inizializzazione Slider
+images.forEach((src, i) => {
+  const slide = document.createElement('div');
+  slide.className = 'slide';
+  slide.innerHTML = `<div class="loader"></div><img src="${src}" draggable="false" onload="imgLoaded(this)">`;
+  slider.appendChild(slide);
+
   const dot = document.createElement('div');
-  dot.classList.add('dot');
-  if(i === 0) dot.classList.add('active');
-  dot.onclick = () => updateImage(i);
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goToSlide(i);
   dotsContainer.appendChild(dot);
 });
 
-function updateImage(index){
-  current = index;
-  mainImage.src = images[current];
-  const dots = document.querySelectorAll('.dot');
-  dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+function imgLoaded(img) {
+  const loader = img.parentElement.querySelector('.loader');
+  if(loader) loader.style.display = 'none';
+  img.style.opacity = '1';
 }
 
-document.getElementById('prev').onclick = ()=>{ current = (current - 1 + images.length) % images.length; updateImage(current); };
-document.getElementById('next').onclick = ()=>{ current = (current + 1) % images.length; updateImage(current); };
-
-const contactButton = document.getElementById('contactButton');
-const contactModal = document.getElementById('contactModal');
-contactButton.onclick = () => { contactModal.classList.add('show'); }
-function closeModal(){ contactModal.classList.remove('show'); }
-contactModal.onclick = (e) => { if(e.target === contactModal){ closeModal(); } }
-
-const imageLightbox = document.getElementById('imageLightbox');
-const lightboxImage = document.getElementById('lightboxImage');
-const imagePrev = document.getElementById('imagePrev');
-const imageNext = document.getElementById('imageNext');
-const imageCounterLightbox = document.getElementById('imageCounterLightbox');
-
-function openLightbox(index){
+function goToSlide(index) {
   current = index;
-  lightboxImage.src = images[current];
-  imageCounterLightbox.textContent = `${current+1} / ${images.length}`;
-  imageLightbox.classList.add('show');
+  slider.style.transform = `translateX(-${current * 100}%)`;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
 }
-function closeLightbox(){ imageLightbox.classList.remove('show'); }
 
-imagePrev.onclick = ()=>{
-  current = (current - 1 + images.length) % images.length;
-  lightboxImage.src = images[current];
-  updateImage(current);
-  imageCounterLightbox.textContent = `${current+1} / ${images.length}`;
-};
-imageNext.onclick = ()=>{
-  current = (current + 1) % images.length;
-  lightboxImage.src = images[current];
-  updateImage(current);
-  imageCounterLightbox.textContent = `${current+1} / ${images.length}`;
-};
-imageLightbox.onclick = (e)=>{ if(e.target === imageLightbox) closeLightbox(); };
+// Supporto Drag/Swipe
+let isDragging = false, startPos = 0, currentTranslate = 0, prevTranslate = 0, animationID = 0;
+
+slider.addEventListener('mousedown', dragStart);
+slider.addEventListener('touchstart', dragStart);
+slider.addEventListener('mouseup', dragEnd);
+slider.addEventListener('mouseleave', dragEnd);
+slider.addEventListener('touchend', dragEnd);
+slider.addEventListener('mousemove', dragMove);
+slider.addEventListener('touchmove', dragMove);
+
+function dragStart(e) { isDragging = true; startPos = getPositionX(e); slider.style.transition = 'none'; animationID = requestAnimationFrame(animation); }
+function dragMove(e) { if (!isDragging) return; const currentPos = getPositionX(e); currentTranslate = prevTranslate + currentPos - startPos; }
+function dragEnd() {
+  isDragging = false; cancelAnimationFrame(animationID);
+  const movedBy = currentTranslate - prevTranslate;
+  if (movedBy < -100 && current < images.length - 1) current++;
+  else if (movedBy > 100 && current > 0) current--;
+  slider.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  goToSlide(current);
+  prevTranslate = -current * slider.clientWidth; currentTranslate = prevTranslate;
+}
+function getPositionX(e) { return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX; }
+function animation() { if (isDragging) { slider.style.transform = `translateX(${currentTranslate}px)`; requestAnimationFrame(animation); } }
+
+// Frecce
+document.getElementById('next').onclick = () => { if(current < images.length - 1) goToSlide(current + 1); else goToSlide(0); prevTranslate = -current * slider.clientWidth; currentTranslate = prevTranslate; };
+document.getElementById('prev').onclick = () => { if(current > 0) goToSlide(current - 1); else goToSlide(images.length - 1); prevTranslate = -current * slider.clientWidth; currentTranslate = prevTranslate; };
+
+// Lightbox
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImg = document.getElementById('lightboxImage');
+const lightboxCounter = document.getElementById('lightboxCounter');
+
+function openLightbox(index) { current = index; updateLightbox(); lightbox.style.display = 'flex'; }
+function updateLightbox() { lightboxImg.src = images[current]; lightboxCounter.textContent = `${current + 1} / ${images.length}`; }
+function closeLightbox() { lightbox.style.display = 'none'; }
+
+document.getElementById('l-next').onclick = (e) => { e.stopPropagation(); current = (current + 1) % images.length; updateLightbox(); goToSlide(current); };
+document.getElementById('l-prev').onclick = (e) => { e.stopPropagation(); current = (current - 1 + images.length) % images.length; updateLightbox(); goToSlide(current); };
+
+// Modal
+function closeModal(){ document.getElementById('contactModal').style.display = 'none'; }
+document.getElementById('contactButton').onclick = () => document.getElementById('contactModal').style.display = 'flex';
+window.onclick = (e) => { if(e.target === lightbox) closeLightbox(); if(e.target === document.getElementById('contactModal')) closeModal(); }
 </script>
 
 </body>
